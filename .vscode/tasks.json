@@ -5,22 +5,19 @@
       "label": "Compilar Nach",
       "command": "/usr/bin/gcc",
       "args": [
-        // "-fdiagnostics-color=always",
         "-g3",
         // "-fsanitize=address",
         // "-Wall -Wextra -Werror",
         // "-Og",
         "${file}",
-        "${workspaceFolder}/sources/src/get_next_line_utils.c",
+        // "${workspaceFolder}/sources/src/get_next_line_utils.c",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}.out"
       ],
       "options": {
         "cwd": "${fileDirname}"
       },
-      "problemMatcher": [
-        "$gcc"
-      ],
+      "problemMatcher": ["$gcc"],
       "group": {
         "kind": "build",
         "isDefault": true
