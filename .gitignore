@@ -1,0 +1,17 @@
+.DS_Store
+._.DS_Store
+*.swo
+*.swp
+*.out
+*.out.*
+*.swm
+*.swk
+*.swl
+*.swn
+*.o
+sources/obj/*
+sources/libft/obj/*
+*.a
+.env
+node_modules/
+._*
