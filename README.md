@@ -20,3 +20,15 @@
 ### Signal()
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
+
+◦ sigemptyset
+◦ sigaddset
+◦ sigaction
+◦ kill
+◦ getpid
+◦ malloc
+◦ free
+◦ pause
+◦ sleep
+◦ usleep
+◦ exit

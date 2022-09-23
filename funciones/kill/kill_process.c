@@ -41,3 +41,16 @@ int main(void)
 // 21) SIGTTIN     22) SIGTTOU     23) SIGIO       24) SIGXCPU
 // 25) SIGXFSZ     26) SIGVTALRM   27) SIGPROF     28) SIGWINCH
 // 29) SIGINFO     30) SIGUSR1     31) SIGUSR2
+
+
+	// SIGALRM: generada cuando el timer asociado a la función alarm expira. También cuando el timer de intervalo es configurado (setitimer)
+	// SIGCHLD: Cuando un proceso termina o para, el proceso envía esta señal a su padre.
+	// 		Por defecto esta señal es ignorada. Normalmente el proceso padre invoca la función wait para obtener el estatus
+	// 		de término del proceso hijo. Se evita así la creación de procesos "zombies".
+	// SIGCONT: es enviada para reanudar un proceso que ha sido parado (suspendido) con SIGSTOP.
+	// SIGINT: generada con DELETE o Control-C
+	// SIGKILL: Permite terminar un proceso.
+	// SIGTSTP: generada cuando presionamos Control-Z. Puede ser ignorada.
+	// SIGSTOP: similar a SIGTSTP pero no puede ser ignorada o capturada.
+	// SIGUSR1: Es una señal definida por el usuario para ser usada en programas de aplicación.
+	// SIGUSR2: Otra como la anterior.

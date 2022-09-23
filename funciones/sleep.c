@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iniciate.c                                         :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 22:32:55 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/09/21 22:46:02 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/09/23 12:47:28 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/09/23 12:47:30 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,30 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-// getpid, getppid -- get parent or calling process identification
-// getpid() returns the process ID of the calling process.  The ID is guaranteed to be unique and is useful for
-//     constructing temporary file names.
+// sleep suspende al proceso llamador por la una cantidad de segundos
+// indicada o hasta que se reciba una señal.
 
-
-#include <stdio.h>
 #include <unistd.h>
 
-int	main(void)
+// unsigned int sleep(unsigned int seconds);
+
+
+void ft_print(int n)
 {
-	while (1)
-		printf("%d Infinite LOOP\n", getpid());
+	write(1, &n, 1);
 }
 
+int main(void)
+{
 
-// https://www.youtube.com/watch?v=qXP4F49K1XM&list=PLyLXXSiuhPPdDGWUm4QlctAq2UDvcOIcP
+	int i = 0;
+
+	while (i < 126)
+	{
+		if (i == 58)
+			sleep(3);
+		ft_print(i);
+		// write(1, &i, 1);
+		i++;
+	}
+}

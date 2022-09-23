@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/System/Volumes/Data/sgoinfre/Perso/nmota-bu/minitalk'
+make: Leaving directory `/System/Volumes/Data/sgoinfre/Perso/nmota-bu/minitalk'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
