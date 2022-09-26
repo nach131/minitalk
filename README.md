@@ -17,18 +17,46 @@
 <!-- ![mapa](minitalk.png) -->
 </h1>
 
-### Signal()
+# Procesos en Unix
+
+Proceso es la instancia de un programa, se pueden crear **n** cantidades de instancias según ejecuciones del programa.
+
+Todos los procesos poseen 4 atributos para poder gestionarlos.
+
+| 	| 	|
+| --- | --- |
+| PID | ***(Process ID)*** Identificador único para cada proceso. conformado por 5 numeros enteros |
+| PPID | ***(Parent Process ID)*** En Unix, cada proceso es creado, por un proceso, este seria el proceso padre.
+| TTY | Terminal a la que esta asociada el proceso, no todos los procesos son creados en terminal, puede haber procesos sin TTY. |
+| UID | ***(User ID)*** Usuario al que pertenece el proceso.
+
+Listar todos los procesos.
+
+	ps
+
+Listar los procesos con el PPID
+
+	ps -f
+
+## Finalizar un proceso
+
+Para finalizar un proceso tenemos dos formas, pulsando **ctrl + C** o localizando el PID
+
+	kill -9 <PID>
+
+# Signal()
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
 
-◦ sigemptyset
-◦ sigaddset
-◦ sigaction
-◦ kill
-◦ getpid
-◦ malloc
-◦ free
-◦ pause
-◦ sleep
-◦ usleep
-◦ exit
+ sigemptyset,  sigaddset, sigaction, kill, getpid, malloc, free, pause, sleep, usleep, exit
+
+ # sigaction()
+
+estructuras dentro de sigaction
+
+|   |   |
+|---|---|
+|**sa_handler** | Puntero de la función de captura |
+| **sa_mask**  | Adicional asignación del bloqueo durante la ejecución de la función de captura |
+| **sa_flag**  | Aviso especial durante comportamiento de signal  |
+| **sa_sigaction**  | Puntero de la función de captura  |

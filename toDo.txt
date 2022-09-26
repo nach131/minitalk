@@ -1,0 +1,4 @@
+Colores en la print txt
+Color red to	warning error client
+info flag como hay que enviar txt desde client
+struct desde header misma para cliente y server..?
