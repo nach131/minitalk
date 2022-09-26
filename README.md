@@ -79,9 +79,7 @@ Cada señal tiene un numero entero que la representa, y un nombre.
 | 17 | SIGSTOP | similar a SIGTSTP pero no puede ser ignorada o capturada.|
 | 18 | SIGTSTP | generada cuando presionamos ***Control-Z***. Puede ser ignorada.|
 | 19 | SIGCONT | Emitido para reanudar un proceso que ha sido parado (suspendido) con SIGSTOP |
-| 20 | SIGCHLD | Cuando un proceso termina o para, el proceso envía esta señal a su padre.
-			Por defecto esta señal es ignorada. Normalmente el proceso padre invoca la función wait para obtener el estatus
-			de término del proceso hijo. Se evita así la creación de procesos "zombies" |
+| 20 | SIGCHLD | Cuando un proceso termina o para, el proceso envía esta señal a su padre. Por defecto esta señal es ignorada. Normalmente el proceso padre invoca la función wait para obtener el estatus de término del proceso hijo. Se evita así la creación de procesos "zombies" |
 | 30 | SIGUSR1 | Es una señal definida por el usuario para ser usada en programas de aplicación |
 | 31 | SIGUSR2 | Es una señal definida por el usuario para ser usada en programas de aplicación |
 
