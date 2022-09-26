@@ -44,6 +44,12 @@ Para finalizar un proceso tenemos dos formas, pulsando **ctrl + C** o localizand
 
 	kill -9 <PID>
 
+### [getped()](https://github.com/nach131/minitalk/blob/main/funciones/kill/iniciate.c)
+
+### [kill process](https://github.com/nach131/minitalk/blob/main/funciones/kill/kill_process.c)
+
+
+
 # Signal()
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
