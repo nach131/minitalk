@@ -55,6 +55,7 @@ Para conocer los signals disponibles en el sistema
 
 	kill -l
 
+Cada señal tiene un numero entero que la representa, y un nombre.
 |	|	|	|	|
 | -- | -- | -- | -- |
 | 1) SIGHUP   |   2) SIGINT    |  3) SIGQUIT    |   4) SIGILL |
@@ -65,6 +66,24 @@ Para conocer los signals disponibles en el sistema
 | 21) SIGTTIN |   22) SIGTTOU  |  23) SIGIO     |   24) SIGXCPU |
 | 25) SIGXFSZ |   26) SIGVTALRM|  27) SIGPROF   |   28) SIGWINCH |
 | 29) SIGINFO |   30) SIGUSR1  |  31) SIGUSR2 |  |
+
+|	Numero | Nombre| Descripción|
+| -- | -- | -- |
+| 1 | SIGHUP | Cuelgue del terminal o proceso terminado |
+| 2 | SIGINT | Emitido si el usuario interrumpe el proceso ***Ctrl + C***|
+| 3 | SIGQUIT | Emitido si el usuario envía señal de salida ***Ctrl + D***| Puntero
+| 8 | SIGFPE | Emitido si se intenta operación matemática prohibida |
+| 9 | SIGKILL | Permite cerrar un proceso y no realiza ninguna operación de limpieza |
+| 14 | SIGALRM | Emitido cuando el timer asociado a la función alarm expira. También cuando el timer de intervalo es configurado (setitimer) |
+| 15 | SIGTERM | Señal de terminación de software (enviada por kill por defecto) |
+| 17 | SIGSTOP | similar a SIGTSTP pero no puede ser ignorada o capturada.|
+| 18 | SIGTSTP | generada cuando presionamos ***Control-Z***. Puede ser ignorada.|
+| 19 | SIGCONT | Emitido para reanudar un proceso que ha sido parado (suspendido) con SIGSTOP |
+| 20 | SIGCHLD | Cuando un proceso termina o para, el proceso envía esta señal a su padre.
+			Por defecto esta señal es ignorada. Normalmente el proceso padre invoca la función wait para obtener el estatus
+			de término del proceso hijo. Se evita así la creación de procesos "zombies" |
+| 30 | SIGUSR1 | Es una señal definida por el usuario para ser usada en programas de aplicación |
+| 31 | SIGUSR2 | Es una señal definida por el usuario para ser usada en programas de aplicación |
 
 # Signal()
 
