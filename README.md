@@ -17,6 +17,11 @@
 <!-- ![mapa](minitalk.png) -->
 </h1>
 
+ Funciones permitidas
+| | | | | | | | | | | |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| sigemptyset | sigaddset | sigaction | kill | getpid | malloc | free | pause | sleep | usleep | exit |
+
 # Procesos en Unix
 
 Proceso es la instancia de un programa, se pueden crear **n** cantidades de instancias según ejecuciones del programa.
@@ -77,17 +82,22 @@ Cada señal tiene un numero entero que la representa, y un nombre.
 | 14 | SIGALRM | Emitido cuando el timer asociado a la función alarm expira. También cuando el timer de intervalo es configurado (setitimer) |
 | 15 | SIGTERM | Señal de terminación de software (enviada por kill por defecto) |
 | 17 | SIGSTOP | similar a SIGTSTP pero no puede ser ignorada o capturada.|
-| 18 | SIGTSTP | generada cuando presionamos ***Control-Z***. Puede ser ignorada.|
+| 18 | SIGTSTP | generada cuando presionamos ***Control + Z***. Puede ser ignorada.|
 | 19 | SIGCONT | Emitido para reanudar un proceso que ha sido parado (suspendido) con SIGSTOP |
 | 20 | SIGCHLD | Cuando un proceso termina o para, el proceso envía esta señal a su padre. Por defecto esta señal es ignorada. Normalmente el proceso padre invoca la función wait para obtener el estatus de término del proceso hijo. Se evita así la creación de procesos "zombies" |
 | 30 | SIGUSR1 | Es una señal definida por el usuario para ser usada en programas de aplicación |
 | 31 | SIGUSR2 | Es una señal definida por el usuario para ser usada en programas de aplicación |
 
 # Signal()
+ ```c
+	int signal(int signum, void (*funct)(int));
+```
+> Signal llamara a función **funct** si el proceso recibe la señal ***S***
+>
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
 
- sigemptyset,  sigaddset, sigaction, kill, getpid, malloc, free, pause, sleep, usleep, exit
+
 
  # sigaction()
 

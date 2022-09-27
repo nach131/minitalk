@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:49:43 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/09/26 10:06:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:06:14 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int n, char *argv[])
 	int	x;
 	while (x != 25)
 	{
+		printf("(25 to exit loop)\n");
 		printf("Input number: ");
 		scanf("%d", &x);
 		printf("Result %d * 5 = %d\n", x, x * 5);
@@ -41,3 +42,7 @@ int	main(int n, char *argv[])
 	}
 	return (0);
 }
+
+// (25 to exit loop)
+// Input number: 25
+// Result 25 * 5 = 125
