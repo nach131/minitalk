@@ -4,8 +4,8 @@
 	minitalk
 </h1>
  <p align="center">
-<!-- <img alt="total-views" src="https://img.shields.io/badge/views-46-blue"> -->
-<!-- <img alt="total-clone" src="https://img.shields.io/badge/clone-172-blue"> -->
+<img alt="total-views" src="https://img.shields.io/badge/views-total_views-blue">
+<img alt="total-clone" src="https://img.shields.io/badge/clone-total_clone-blue">
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/nach131/minitalk">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/nach131/minitalk">
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/nach131/minitalk">
@@ -96,15 +96,40 @@ Cada señal tiene un numero entero que la representa, y un nombre.
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
 
-
-
  # sigaction()
+```c
+ int	sigaction(int sig, const struct sigaction *restrict act, struct sigaction *restrict oact);
+```
+Permite que el proceso de llamada examine o especifique la acción que se llevará a cabo al recibir una señal específica.
 
-estructuras dentro de sigaction
+El argumento sig especifica la señal y se le puede asignar cualquiera de las señales especificadas en signal.h excepto SIGKILL y SIGSTOP.
 
-|   |   |
-|---|---|
-|**sa_handler** | Puntero de la función de captura |
-| **sa_mask**  | Adicional asignación del bloqueo durante la ejecución de la función de captura |
-| **sa_flag**  | Aviso especial durante comportamiento de signal  |
-| **sa_sigaction**  | Puntero de la función de captura  |
+>Si el argumento ***act*** no es ***NULL***, apunta a una estructura que especifica la nueva acción de entrega de **signal**
+Si el argumento ***oact*** no es ***NULL*** apunta a una estructura donde la acción previamente asociada con **signal** almacenara el retorno de **sigaction**.
+>
+
+```c
+	struct  sigaction {
+             union __sigaction_u __sigaction_u;  /* controlador de señal */
+             sigset_t sa_mask;               /* máscara de señal para aplicar */
+             int     sa_flags;               /* Signal a continuación*/
+     };
+```
+`sa_mask` Adicional asignación del bloqueo durante la ejecución de la función de captura 
+
+`sa_flag` Aviso especial durante comportamiento de signal
+
+Estructuras dentro de sigaction
+
+```c
+  union __sigaction_u {
+             void    (*__sa_handler)(int);
+             void    (*__sa_sigaction)(int, siginfo_t *,
+                            void *);
+     };
+```
+
+
+`sa_handler` Puntero de la función de captura 
+
+`sa_sigaction` Puntero de la función de captura 
