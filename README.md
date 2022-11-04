@@ -111,8 +111,8 @@ Si el argumento ***oact*** no es ***NULL*** apunta a una estructura donde la acc
 ```c
 	struct  sigaction {
              union __sigaction_u __sigaction_u;  /* controlador de señal */
-             sigset_t sa_mask;               /* máscara de señal para aplicar */
-             int     sa_flags;               /* Signal a continuación*/
+             sigset_t sa_mask;                   /* máscara de señal para aplicar */
+             int     sa_flags;                   /* Signal a continuación*/
      };
 ```
 `sa_mask` Adicional asignación del bloqueo durante la ejecución de la función de captura 
