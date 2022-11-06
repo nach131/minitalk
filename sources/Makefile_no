@@ -1,0 +1,82 @@
+NAME				= minitalk
+# NAME_CLIENT = client.out
+# NAME_SERVER = server.out
+
+# === COLORS === #
+
+GREEN		=\033[0;32m
+BLUE 		=\033[0;34m
+ORANGE	=\033[38;5;214m
+RED			=\033[0;31m
+YELLOW	= \033[0;33m
+WHITE		= \033[0;37m
+
+# === COMPILATE === #
+
+CC			= gcc
+CFLAGS	= -Wall -Wextra -Werror -g3
+AR 			= ar -rcs
+RM			= rm -f
+MKDIR		= @-mkdir -p
+
+# === DIRECTORIES === #
+
+LIBFT_DIR = libft/
+INCLUDES 	= inc/
+SRC_DIR 	= src/
+OBJ_DIR 	= obj/
+
+# === SOURCES === #
+
+CLIENT_DIR = client/
+CLIENT_FILES = client
+
+SERVER_DIR = server/
+SERVER_FILES = server
+
+SRC_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
+SRC_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
+
+SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+# === RULES === #
+
+all: DIR LIBFS $(NAME)
+# all: DIR LIBFS $(NAME_CLIENT)
+
+LIBFS:
+			@make -C $(LIBFT_DIR)
+
+$(NAME) : $(OBJS)
+			@$(AR) $(NAME) $(OBJS)
+			@echo "$(GREEN)\n ✓ Creado $(NAME)\n$(WHITE)"
+
+# $(NAME_CLIENT) : $(OBJ) $(INCLUDES)/*.h
+
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)/*.h
+			@echo "$(ORANGE) Compilando  ➟  $(BLUE)$< $(WHITE)"
+#@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+			@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+
+DIR:
+			$(MKDIR) $(OBJ_DIR)
+			$(MKDIR) $(OBJ_DIR)$(CLIENT_DIR)
+			$(MKDIR) $(OBJ_DIR)$(SERVER_DIR)
+
+clean : 
+			@$(RM) -rf $(OBJ_DIR)
+			@echo "$(RED)\n ✗ Archivos objetos Minitalk borrados.‼️\n$(WHITE)";
+
+fclean : clean
+			@$(RM) -f $(NAME)
+			@echo "$(BLUE) Todo Super limpito...✌🏼$(WHITE)"
+
+re: fclean all
+			@echo "$(YELLOW) Borrado todo y recompilado...✌🏼$(WHITE)"
+
+norm:
+			@norminette $(SRCS) $(INCLUDES) | grep -v Norme -B1 || true
+
+# Non-file targets
+.PHONY: all clean fclean re norm

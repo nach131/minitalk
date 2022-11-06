@@ -1,9 +1,11 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode",
-	"files.associations": {
-		"*.js": "javascriptreact",
-		"*.hbs": "handlebars",
-		"*.c": "c",
-		"sstream": "c"
-	}
+  "makefile.extensionOutputFolder": "./.vscode",
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.hbs": "handlebars",
+    "*.c": "c",
+    "sstream": "c"
+  },
+  "C_Cpp.errorSquiggles": "Disabled",
+  "cSpell.words": ["lstsize"]
 }
