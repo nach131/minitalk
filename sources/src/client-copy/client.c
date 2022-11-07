@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/07 10:54:18 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/06 13:07:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include <stdio.h>
-// #include "minitalk.h"
-#include "../../inc/minitalk.h"
+#include "minitalk.h"
+// #include "../../inc/minitalk.h"
 
 void	ft_error(unsigned char error)
 {

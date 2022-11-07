@@ -1,5 +1,5 @@
 NAME				= minitalk
-# NAME_CLIENT = client
+NAME_CLIENT = client
 # NAME_SERVER = server
 
 # === COLORS === #
@@ -25,8 +25,11 @@ LIBFT_DIR = libft/
 INCLUDES 	= inc/
 SRC_DIR 	= src/
 OBJ_DIR 	= obj/
+EXE_DIR		= exe/
 
 # === SOURCES === #
+
+LIBSFT = $(LIBFT_DIR)libft.a
 
 CLIENT_DIR = client/
 CLIENT_FILES = client
@@ -39,6 +42,7 @@ SRC_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+EXECS = $(addprefix $(EXE_DIR), $(addsuffix .out, $(SRC_FILES)))
 
 # === RULES === #
 
@@ -47,21 +51,32 @@ all: DIR LIBFS $(NAME)
 LIBFS:
 			@make -C $(LIBFT_DIR)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(EXECS)
 			@$(AR) $(NAME) $(OBJS)
 			@echo "$(GREEN)\n ✓ Creado $(NAME)\n$(WHITE)"
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)/*.h
-			@echo "$(ORANGE) Compilando  ➟  $(BLUE)$< $(WHITE)"
-			@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)*.h
+			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
+# @$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+			@$(CC) -MT $@ -MMD -MP $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+
+$(EXE_DIR)%.out : $(SRC_DIR)%.c $(INCLUDES)*.h
+# $(CC) $(CFLAGS) $(LIBSFT) $< -o $@ // OK pero cambiado path minitalk.h
+			$(CC) $(CFLAGS) $(LIBSFT) $< -o $@
+#	$(CC) $(CFLAGS) $(LIBSFT) $(INCLUDES)$(NAME).h $< -o $@ // cannot specify -o when generating multiple output files
+			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
 DIR:
 			$(MKDIR) $(OBJ_DIR)
 			$(MKDIR) $(OBJ_DIR)$(CLIENT_DIR)
 			$(MKDIR) $(OBJ_DIR)$(SERVER_DIR)
+			$(MKDIR) $(EXE_DIR)
+			$(MKDIR) $(EXE_DIR)$(CLIENT_DIR)
+			$(MKDIR) $(EXE_DIR)$(SERVER_DIR)
 
 clean : 
 			@$(RM) -rf $(OBJ_DIR)
+			@$(RM) -rf $(EXE_DIR)
 			@echo "$(RED)\n ✗ Archivos objetos Minitalk borrados.‼️\n$(WHITE)";
 
 fclean : clean
