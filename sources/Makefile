@@ -57,13 +57,10 @@ $(NAME) : $(OBJS) $(EXECS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)*.h
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
-# @$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 			@$(CC) -MT $@ -MMD -MP $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
-$(EXE_DIR)%.out : $(SRC_DIR)%.c $(INCLUDES)*.h
-# $(CC) $(CFLAGS) $(LIBSFT) $< -o $@ // OK pero cambiado path minitalk.h
-			$(CC) $(CFLAGS) $(LIBSFT) $< -o $@
-#	$(CC) $(CFLAGS) $(LIBSFT) $(INCLUDES)$(NAME).h $< -o $@ // cannot specify -o when generating multiple output files
+$(EXE_DIR)%.out : $(OBJ_DIR)%.o $(INCLUDES)*.h
+			@$(CC) $(CFLAGS) $(LIBSFT) $< -o $@
 			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
 DIR:
