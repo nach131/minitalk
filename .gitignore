@@ -4,6 +4,7 @@
 *.swp
 *.out
 *.out.*
+*.out.dSYM
 *.swm
 *.swk
 *.swl
@@ -16,4 +17,3 @@ sources/exe
 .env
 node_modules/
 ._*
-*.out.dSYM

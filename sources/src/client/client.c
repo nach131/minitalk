@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/08 10:27:14 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/08 11:01:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include <stdio.h>
 #include "minitalk.h"
-// #include "../../inc/minitalk.h"
 
 int	main(void)
 {
@@ -27,4 +26,3 @@ int	main(void)
 }
 
 
-// gcc client.c ../../obj/utils/utils.o ../../libft/libft.a
