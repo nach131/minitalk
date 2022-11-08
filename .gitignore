@@ -9,8 +9,9 @@
 *.swl
 *.swn
 *.o
-sources/obj/*
-sources/libft/obj/*
+sources/obj
+sources/libft/obj
+sources/exe
 *.a
 .env
 node_modules/

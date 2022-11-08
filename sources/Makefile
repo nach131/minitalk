@@ -1,25 +1,28 @@
+# ═══ NAMES ═══════════════════════════════════════════════════════════════════#
+
 NAME				= minitalk
 NAME_CLIENT = client
-# NAME_SERVER = server
+NAME_SERVER	=	server
 
-# === COLORS === #
+# ═══ COLORS ══════════════════════════════════════════════════════════════════#
 
 GREEN		=\033[0;32m
 BLUE 		=\033[0;34m
 ORANGE	=\033[38;5;214m
 RED			=\033[0;31m
-YELLOW	= \033[0;33m
-WHITE		= \033[0;37m
+YELLOW	=\033[0;33m
+WHITE		=\033[0;37m
 
-# === COMPILATE === #
+# ═══ COMPILATE ══════════════════════════════════════════════════════════════════#
 
 CC			= gcc
 CFLAGS	= -Wall -Wextra -Werror -g3
 AR 			= ar -rcs
 RM			= rm -f
-MKDIR		= @-mkdir -p
+MKDIR		= -mkdir -p
+# MKDIR		= @-mkdir -p
 
-# === DIRECTORIES === #
+# ═══ DIRECTORIES ═════════════════════════════════════════════════════════════#
 
 LIBFT_DIR = libft/
 INCLUDES 	= inc/
@@ -27,49 +30,48 @@ SRC_DIR 	= src/
 OBJ_DIR 	= obj/
 EXE_DIR		= exe/
 
-# === SOURCES === #
+CLIENT_DIR = client/
+UTILS_DIR = utils/
+SERVER_DIR = server/
+
+# ═══ SOURCES ════════════════════════════════════════════════════════════════#
 
 LIBSFT = $(LIBFT_DIR)libft.a
 
-CLIENT_DIR = client/
 CLIENT_FILES = client
-
-SERVER_DIR = server/
 SERVER_FILES = server
+UTILS_FILES = utils
 
+SRC_FILES+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
 SRC_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
 SRC_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 
+EXE_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
+EXE_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
+
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-EXECS = $(addprefix $(EXE_DIR), $(addsuffix .out, $(SRC_FILES)))
+EXECS = $(addprefix $(EXE_DIR), $(addsuffix .out, $(EXE_FILES)))
 
-# === RULES === #
+# ═══ RULES ══════════════════════════════════════════════════════════════════#
 
-all: DIR LIBFS $(NAME)
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)*.h
+			@$(MKDIR) $(dir $@)
+			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
+			@$(CC) -MT $@ -MMD -MP $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+
+all: LIBFS $(NAME)
 
 LIBFS:
 			@make -C $(LIBFT_DIR)
 
 $(NAME) : $(OBJS) $(EXECS)
-			@$(AR) $(NAME) $(OBJS)
-			@echo "$(GREEN)\n ✓ Creado $(NAME)\n$(WHITE)"
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)*.h
-			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
-			@$(CC) -MT $@ -MMD -MP $(CFLAGS) -I$(INCLUDES) -c $< -o $@
-
-$(EXE_DIR)%.out : $(OBJ_DIR)%.o $(INCLUDES)*.h
-			@$(CC) $(CFLAGS) $(LIBSFT) $< -o $@
+# $(EXE_DIR)%.out : $(OBJ_DIR)%.o $(INCLUDES)*.h
+$(EXE_DIR)%.out : $(OBJ_DIR)%.o
+			@$(MKDIR) $(dir $@)
+			@$(CC) $(CFLAGS) $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
 			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
-
-DIR:
-			$(MKDIR) $(OBJ_DIR)
-			$(MKDIR) $(OBJ_DIR)$(CLIENT_DIR)
-			$(MKDIR) $(OBJ_DIR)$(SERVER_DIR)
-			$(MKDIR) $(EXE_DIR)
-			$(MKDIR) $(EXE_DIR)$(CLIENT_DIR)
-			$(MKDIR) $(EXE_DIR)$(SERVER_DIR)
 
 clean : 
 			@$(RM) -rf $(OBJ_DIR)
@@ -87,4 +89,4 @@ norm:
 			@norminette $(SRCS) $(INCLUDES) | grep -v Norme -B1 || true
 
 # Non-file targets
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re norm LIBFS

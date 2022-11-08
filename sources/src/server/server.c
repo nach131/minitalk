@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/04 19:41:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/08 10:03:47 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include <stdio.h>
+#include <signal.h>
 
+// int	main(int argc, char **argv)
 int	main(void)
 {
-	printf("Tomate");
+
+	// struct sigaction signal_a;
+	// pid_t pid;
+	printf("Server\n");
+
 
 	return(0);
 }

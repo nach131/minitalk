@@ -5,13 +5,13 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "lldb",
-			"request": "launch",
-			"name": "lldb active file",
-			"program": "${fileDirname}/${fileBasenameNoExtension}.out",
-			"args": [],
-			"stopOnEntry": false,
-			"cwd": "${fileDirname}"
-		}
+      "type": "lldb",
+      "request": "launch",
+      "name": "lldb active file",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+      "args": ["UNO", "DOS"],
+      "stopOnEntry": false,
+      "cwd": "${fileDirname}"
+    }
 	]
 }

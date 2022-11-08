@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/08 10:27:14 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/08 10:00:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include <stdio.h>
 #include "minitalk.h"
-// #include "../../inc/minitalk.h"
 
-int	main(void)
+void	ft_error(unsigned char error)
 {
-	ft_printf("Tomate\n");
-	ft_error(ERROR_1 | ERROR_3 | ERROR_0);
-
-	return(0);
+	if (error & ERROR_0)
+		printf("%s", ERR_MS0);
+	if (error & ERROR_1)
+		printf("%s", ERR_MS1);
+	if (error & ERROR_2)
+		printf("%s", ERR_MS2);
+	if (error & ERROR_3)
+		printf("%s", ERR_MS3);
 }
-
-
-// gcc client.c ../../obj/utils/utils.o ../../libft/libft.a
