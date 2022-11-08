@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/08 11:58:04 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/08 23:24:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,18 @@
 #include <stdio.h>
 #include "minitalk.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_printf("Tomate\n");
-	ft_error(ERROR_1 | ERROR_3 | ERROR_0);
+	(void)argv;
+
+	if (argc != 3)
+	{
+		ft_error(ERROR_0);
+		return(1);
+	}
+
+	ft_print_bits(argv[2][0]);
+	// ft_error(ERROR_1 | ERROR_3 | ERROR_0);
 
 	return(0);
 }

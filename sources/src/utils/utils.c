@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/08 20:37:42 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/08 23:42:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minitalk.h"
-#include "../../libft/inc/libft.h"
-
 
 void	ft_error(unsigned char error)
 {
@@ -29,4 +27,18 @@ void	ft_error(unsigned char error)
 		ft_putstr_fd(Red"Error 2: Not defined yet\n"White, 1);
 	if (error & ERROR_3)
 		ft_putstr_fd(Red"Error 3: Not defined yet\n"White, 1);
+}
+void	ft_print_bits(unsigned char octet)
+{
+	int i;
+	char bits;
+
+	i = 7;
+	while (i >= 0)
+	{
+		bits = ((octet >> i) & 1) + '0';
+		ft_putstr_fd(Green"", 1);
+		write(1, &bits, 1);
+		i--;
+	}
 }
