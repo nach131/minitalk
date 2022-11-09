@@ -51,11 +51,12 @@ EXE_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-EXECS = $(addprefix $(EXE_DIR),  $(EXE_FILES))
+EXECS = $(addprefix $(EXE_DIR), $(EXE_FILES))
+DEPS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 # ═══ RULES ══════════════════════════════════════════════════════════════════#
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INCLUDES)*.h
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
 			@$(CC) -MT $@ -MMD -MP $(CFLAGS) -I$(INCLUDES) -c $< -o $@
@@ -70,7 +71,7 @@ $(NAME) : $(OBJS) $(EXECS)
 # $(EXE_DIR)%.out : $(OBJ_DIR)%.o $(INCLUDES)*.h
 $(EXE_DIR)% : $(OBJ_DIR)%.o
 			@$(MKDIR) $(dir $@)
-			@$(CC) $(CFLAGS) $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
+			@$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
 			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
 clean : 
@@ -88,5 +89,6 @@ re: fclean all
 norm:
 			@norminette $(SRCS) $(INCLUDES) | grep -v Norme -B1 || true
 
+-include $(DEPS)
 # Non-file targets
 .PHONY: all clean fclean re norm LIBFS
