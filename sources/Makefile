@@ -51,7 +51,7 @@ EXE_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-EXECS = $(addprefix $(EXE_DIR), $(addsuffix .out, $(EXE_FILES)))
+EXECS = $(addprefix $(EXE_DIR),  $(EXE_FILES))
 
 # ═══ RULES ══════════════════════════════════════════════════════════════════#
 
@@ -68,7 +68,7 @@ LIBFS:
 $(NAME) : $(OBJS) $(EXECS)
 
 # $(EXE_DIR)%.out : $(OBJ_DIR)%.o $(INCLUDES)*.h
-$(EXE_DIR)%.out : $(OBJ_DIR)%.o
+$(EXE_DIR)% : $(OBJ_DIR)%.o
 			@$(MKDIR) $(dir $@)
 			@$(CC) $(CFLAGS) $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
 			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
