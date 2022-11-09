@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/08 20:36:02 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:08:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void ft_get_pid(void)
 	pid = getpid();
 
 	if (!pid)
-		ft_error(ERROR_1);
+		ft_message(Danger, MSG_DAN_1);
 	ft_putstr_fd(Orange"Pid: ", 1);
 	ft_printf("%i\n", pid);
 }
