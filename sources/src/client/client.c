@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/08 23:24:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:00:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	}
 
 	ft_print_bits(argv[2][0]);
-	// ft_error(ERROR_1 | ERROR_3 | ERROR_0);
+	ft_error(ERROR_1 | ERROR_3 | ERROR_0);
 
 	return(0);
 }
