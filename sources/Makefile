@@ -13,14 +13,13 @@ RED			=\033[0;31m
 YELLOW	=\033[0;33m
 WHITE		=\033[0;37m
 
-# ═══ COMPILATE ══════════════════════════════════════════════════════════════════#
+# ═══ COMPILATE ═══════════════════════════════════════════════════════════════#
 
 CC			= gcc
 CFLAGS	= -Wall -Wextra -Werror -g3
 AR 			= ar -rcs
 RM			= rm -f
 MKDIR		= -mkdir -p
-# MKDIR		= @-mkdir -p
 
 # ═══ DIRECTORIES ═════════════════════════════════════════════════════════════#
 
@@ -30,17 +29,17 @@ SRC_DIR 	= src/
 OBJ_DIR 	= obj/
 EXE_DIR		= exe/
 
-CLIENT_DIR = client/
-UTILS_DIR = utils/
-SERVER_DIR = server/
+CLIENT_DIR	= client/
+UTILS_DIR		= utils/
+SERVER_DIR	= server/
 
-# ═══ SOURCES ════════════════════════════════════════════════════════════════#
+# ═══ SOURCES ═════════════════════════════════════════════════════════════════#
 
 LIBSFT = $(LIBFT_DIR)libft.a
 
-CLIENT_FILES = client
-SERVER_FILES = server
-UTILS_FILES = utils
+CLIENT_FILES	= client
+SERVER_FILES	= server
+UTILS_FILES		= utils
 
 SRC_FILES+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
 SRC_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
@@ -51,8 +50,8 @@ EXE_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-EXECS = $(addprefix $(EXE_DIR), $(EXE_FILES))
 DEPS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
+EXECS = $(addprefix $(EXE_DIR), $(EXE_FILES))
 
 # ═══ RULES ══════════════════════════════════════════════════════════════════#
 
@@ -68,7 +67,6 @@ LIBFS:
 
 $(NAME) : $(OBJS) $(EXECS)
 
-# $(EXE_DIR)%.out : $(OBJ_DIR)%.o $(INCLUDES)*.h
 $(EXE_DIR)% : $(OBJ_DIR)%.o
 			@$(MKDIR) $(dir $@)
 			@$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
@@ -90,5 +88,6 @@ norm:
 			@norminette $(SRCS) $(INCLUDES) | grep -v Norme -B1 || true
 
 -include $(DEPS)
+
 # Non-file targets
 .PHONY: all clean fclean re norm LIBFS

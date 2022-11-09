@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   enum.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/10 00:54:11 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/09 23:22:32 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/09 23:30:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minitalk.h"
+enum color { Rojo, Verde, Azul };
 
-void	ft_print_bits(unsigned char octet)
-{
-	int i;
-	char bits;
 
-	i = 7;
-	while (i >= 0)
-	{
-		bits = ((octet >> i) & 1) + '0';
-		ft_putstr_fd(GREEN"", 1);
-		write(1, &bits, 1);
-		i--;
-	}
+int f(void) {
+	enum	 color c;
+	return c;
 }
+
+int	main(void)
+{
+	int i = f();
+
+}
+
