@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/11 21:01:49 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:15:22 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,18 @@ int	main(int argc, char **argv)
 	int	pid;
 	(void)argv;
 
-	if (argc != 3)
+	if (argc <= 2)
 	{
 		ft_message(Danger, MSG_DAN_0);
 		return(1);
 	}
+	else if (argc >= 4)
+	{
+		ft_message(Danger, MSG_DAN_1);
+		return(1);
+	}
 	pid = ft_atoi(argv[1]);
 	send_signal(pid, argv[2]);
-
-
-
 
 	return(0);
 }
