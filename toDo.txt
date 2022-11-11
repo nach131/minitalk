@@ -6,3 +6,46 @@ struct desde header misma para cliente y server..?
 error
 invalid id,
 invalis argumento
+
+SIGKILL -> PARAR UN Proceso
+SIGSTOP -> PAUSAR UN Proces
+SIGCONT -> PARA REANUDADAR UN PROCESO
+
+mesage de bienvenida y de información de que hacer...?
+
+https://manpages.ubuntu.com/manpages/bionic/es/man2/sigaction.2.html
+
+    La estructura sigaction se define como algo parecido a
+
+struct sigaction {
+		void (*sa_handler)(int);
+		void (*sa_sigaction)(int, siginfo_t *, void *);
+		sigset_t sa_mask;
+		int sa_flags;
+		void (*sa_restorer)(void);
+}
+
+
+ SA_SIGINFO
+	El  manejador  de  señal  toma  3  argumentos, no uno. En este caso, se debe
+	configurar sa_sigaction en lugar de sa_handler.  (El campo sa_sigaction  fue
+	añadido en la versión 2.1.86 de Linux.)
+
+El parámetro siginfo_t para sa_sigaction es una estructura con los siguientes elementos
+
+siginfo_t {
+		int      si_signo;  /* Número de señal */
+		int      si_errno;  /* Un valor errno */
+		int      si_code;   /* Código de señal */
+		pid_t    si_pid;    /* ID del proceso emisor */
+		uid_t    si_uid;    /* ID del usuario real del proceso emisor */
+		int      si_status; /* Valor de salida o señal */
+		clock_t  si_utime;  /* Tiempo de usuario consumido */
+		clock_t  si_stime;  /* Tiempo de sistema consumido */
+		sigval_t si_value;  /* Valor de señal */
+		int      si_int;    /* señal POSIX.1b */
+		void *   si_ptr;    /* señal POSIX.1b */
+		void *   si_addr;   /* Dirección de memoria que ha producido el fallo */
+		int      si_band;   /* Evento de conjunto */
+		int      si_fd;     /* Descriptor de fichero */
+}

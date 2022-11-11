@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 05:55:54 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/09 21:07:45 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/11 09:55:58 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@
 // {
 // 	Danger,
 // 	Warning,
-// 	Info,
 // 	Success,
 // }			ERR;
 
-void	ft_error(unsigned char error);
 void	ft_print_bits(unsigned char octet);
+void	ft_process_bar(void);
 
 #endif

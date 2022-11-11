@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iniciate.c                                         :+:      :+:    :+:   */
+/*   proces_bar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 22:32:55 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/10 13:56:19 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/10 14:29:13 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/10 14:49:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,52 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-// getpid, getppid -- get parent or calling process identification
-// getpid() returns the process ID of the calling process.  The ID is guaranteed to be unique and is useful for
-//     constructing temporary file names.
-
-
+// C program to create loading bar
 #include <stdio.h>
+#include <stdlib.h>
+//#include <windows.h>
 #include <unistd.h>
 
-int	main(void)
+// Function to creating loading bar
+void loadingBar()
 {
-	while (1)
-	{
-		printf("%d Infinite LOOP\n", getpid());
+	// 0 - black background,
+	// A - Green Foreground
+	system("color 0A");
+
+	// Initialize char for printing
+	// loading bar
+	char a = 45; 
+	char b = 46;
+
+	printf("\n\n\n\n");
+	printf("\n\n\n\n\t\t\t\t\t");
+	printf("waiting message...\n\n");
+	printf("\t\t\t\t\t");
+
+	// Print initial loading bar
+	for (int i = 0; i < 26; i++)
+		printf("%c", a);
+
+	// Set the cursor again starting
+	// point of loading bar
+	printf("\r");
+	printf("\t\t\t\t\t");
+
+	// Print loading bar progress
+	for (int i = 0; i < 26; i++) {
+		printf("%c", b);
+
+		// Sleep for 1 second
 		sleep(1);
 	}
 }
 
+// Driver Code
+int main()
+{
+	// Function Call
+	loadingBar();
+	return 0;
+}
 
-// https://www.youtube.com/watch?v=qXP4F49K1XM&list=PLyLXXSiuhPPdDGWUm4QlctAq2UDvcOIcP

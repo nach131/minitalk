@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iniciate.c                                         :+:      :+:    :+:   */
+/*   iniciate_signal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:32:55 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/10 13:56:19 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:11:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,23 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <signal.h>
+
+void	handler_put(int sig)
+{
+	printf("Signal n: %d\n", sig);
+
+}
 
 int	main(void)
 {
+	signal(SIGUSR1, &handler_put);
+
 	while (1)
 	{
 		printf("%d Infinite LOOP\n", getpid());
-		sleep(1);
+		sleep(2);
 	}
 }
 
-
-// https://www.youtube.com/watch?v=qXP4F49K1XM&list=PLyLXXSiuhPPdDGWUm4QlctAq2UDvcOIcP
+// kill -SIGUSR1 <num pid> // ejecuta handler_put

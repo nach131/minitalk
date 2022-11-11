@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iniciate.c                                         :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 22:32:55 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/10 13:56:19 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/09 21:07:38 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-// getpid, getppid -- get parent or calling process identification
-// getpid() returns the process ID of the calling process.  The ID is guaranteed to be unique and is useful for
-//     constructing temporary file names.
-
-
 #include <stdio.h>
-#include <unistd.h>
+#include "minitalk.h"
 
-int	main(void)
+
+int	main(int argc, char **argv)
 {
-	while (1)
+	(void)argv;
+
+	if (argc != 3)
 	{
-		printf("%d Infinite LOOP\n", getpid());
-		sleep(1);
+		ft_message(Danger, MSG_DAN_0);
+		return(1);
 	}
+
+	ft_message(Danger, MSG_DAN_1);
+	ft_message(Warning, MSG_WAR_1);
+	ft_message(Info, MSG_INF_1);
+	ft_message(Success, MSG_SUC_1);
+
+
+	return(0);
 }
 
 
-// https://www.youtube.com/watch?v=qXP4F49K1XM&list=PLyLXXSiuhPPdDGWUm4QlctAq2UDvcOIcP

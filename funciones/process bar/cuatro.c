@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigaction.c                                        :+:      :+:    :+:   */
+/*   cuatro.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 10:24:55 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/09/26 10:58:40 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/10 16:38:45 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/11 09:55:28 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,45 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include <stdio.h>
-#include <signal.h>
+#include <unistd.h>
 
-using namespace std;
-
-void	handler(int signum)
+int main(int argc, char **argv)
 {
-	if (signum == SIGINT)
-	{
-		count << " CONTROL SIGNAL IS PRESSED!";
-	}
-}
+	// char arrows[6][12] = {
+	// 	"(-*--------)" ,
+	// 	"(-----*----)",
+	// 	"(---------*)",
+	// 	"(--------*-)",
+	// 	"(---*------)",
+	// 	"(*---------)" };
 
-int	main()
-{
-	struct sigaction sa;
-	sa.sa_handler = handler;
+	char arrows[6][12] = {
+"(-o--------)" ,
+"(-----o----)",
+"(---------o)",
+"(--------o-)",
+"(---o------)",
+"(o---------)" };
+
+	int i = 0;
 
 	while (1)
 	{
-		cerr << "/";
-		usleep(1000000);
-		if (sigaction(SIGINT, &sa, NULL) == 1)
-			perror("SIGACTION");
+		write(1, &arrows[i], 12);
+		// fflush(stdout);
+		i++;
+		if (i > 5)
+			i = 0;
+
+		// sleep(1);
+		usleep(200000);
+		int j = 0;
+		while (j < 15)
+		{
+			write(1, "\b", 1);
+			j++;
+		}
 	}
-	return(0);
+
+	return 0;
 }
