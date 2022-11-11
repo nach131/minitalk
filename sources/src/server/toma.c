@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   toma.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/11 20:15:38 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:46:11 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minitalk.h"
+// #include "minitalk.h"
 // ESTO PARA DEBUG VS
-#include <stdio.h>
-// #include "../../inc/minitalk.h"
-// #include "../../libft/inc/libft.h"
+#include "../../inc/minitalk.h"
+#include "../../libft/inc/libft.h"
 
 // #include <limits.h>
 
@@ -31,23 +30,9 @@
 static void tokemo(int sig, siginfo_t *info, void *data)
 {
 	write(1, "\n", 1);
-	(void)sig;
-	if (info->si_signo == 30)
-	{
-		ft_print_bits('0');
-	}
-	else if (info->si_signo == 31)
-	{
-		ft_print_bits('1');
-	}
-	(void)info;
-	(void)data;
-	printf(ORANGE"%s\n", data);
-	ft_printf(BLUE"si_signo %i\n", info->si_signo);
-	printf(RED"%li- %i", info->si_band, info->si_errno);
-	ft_printf(WHITE"");
-
-
+	// ft_printf("%i\n", sig);
+	// ft_printf("%s\n", data);
+	ft_printf("%i\n", info->si_signo);
 }
 
 static void ft_get_pid(void)
@@ -60,22 +45,17 @@ static void ft_get_pid(void)
 	ft_printf(ORANGE" Pid: %i\n"WHITE, pid);
 }
 
-static void init()
-{
-	struct sigaction sa;
-	sa.sa_flags = SA_RESTART;
-	sa.sa_sigaction = tokemo;
-	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		exit(EXIT_FAILURE);
-	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-		exit(EXIT_FAILURE);
-}
-
 int	main(void)
 {
+	struct sigaction sa;
+
+	sa.sa_flags = SA_RESTART;
+	// sa.sa_flags = SA_SIGINFO;
+	// sa.sa_handler = &handler_sigurs1;
+	sa.sa_sigaction = tokemo;
+	sigaction(SIGUSR1, &sa, NULL);
 
 	ft_get_pid();
-	init();
 	ft_process_bar();
 
 	return(0);

@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "lldb active file",
       "program": "${fileDirname}/${fileBasenameNoExtension}.out",
-      "args": ["UNO", "DOS"],
+      "args": ["85883", "12"],
       "stopOnEntry": false,
       "cwd": "${fileDirname}"
     }

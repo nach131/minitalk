@@ -49,3 +49,9 @@ siginfo_t {
 		int      si_band;   /* Evento de conjunto */
 		int      si_fd;     /* Descriptor de fichero */
 }
+
+printers
+
+32	- 0010 0000
+
+126	- 0111 1110

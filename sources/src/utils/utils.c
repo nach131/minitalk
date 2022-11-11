@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/11 12:46:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:45:11 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,17 @@ void	ft_print_bits(unsigned char octet)
 	while (i >= 0)
 	{
 		bits = ((octet >> i) & 1) + '0';
-		ft_putstr_fd(GREEN"", 1);
-		write(1, &bits, 1);
+		ft_printf(GREEN"%c", bits);
 		i--;
 	}
+	
 }
+
+// int	ft_find_bit(unsigned char octet)
+// {
+// 	int	i;
+// 	char
+// }
 
 void	ft_spinner(void)
 {

@@ -11,6 +11,8 @@
         // "-Og",
         "${file}",
         // "${workspaceFolder}/sources/src/get_next_line_utils.c",
+        "${workspaceFolder}/sources/libft/libft.a",
+        "${workspaceFolder}/sources/obj/utils/utils.o",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}.out"
       ],
