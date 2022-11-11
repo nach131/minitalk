@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s2.c                                               :+:      :+:    :+:   */
+/*   communicating.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:49:24 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/10 21:45:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/11 12:06:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,57 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
+// https://www.youtube.com/watch?v=ShWkfAyuuWw
 
 #include <unistd.h>
 #include <stdio.h>
 #include <signal.h>
+#include <sys/wait.h>
 
-void handler(int num)
+int x = 0;
+
+void mult(void)
 {
-	write(STDOUT_FILENO, "No para\n", 8);
-	if (num == 30)
-		printf("SIGUSR1 n: %d\n", num);
-	else if (num == 31)
-		printf("SIGUSR2 n: %d\n", num);
-
+	write(1, "3 x 5 = ", 8);
 }
 
-void seghandle(int num)
+void handler_sigurs1(int signum)
 {
-	write(STDOUT_FILENO, "Seg Fault\n", 10);
-}
-
-int	main(void)
-{
-	struct sigaction sa;
-	sa.sa_handler = handler;
-	if (sigemptyset(&sa.sa_mask) == -1)
-		perror("SIGEMPTYSET")
-		//sigmeptyset() function initializes the signal set pointer by the parameter
-		// declaration in signal.h == int  sigaddset(sigset_t *set, int signo);
-		sa.sa_flags = SA_RESTART; // enamble functiosn to re-run if it was interrupted by handler
-
-	sigaction(SIGUSR2, &sa, NULL);
-	sigaction(SIGUSR1, &sa, NULL);
-
-	while (1)
+	if (x == 0)
 	{
-		printf("%d Infinite LOOP\n", getpid());
-		sleep(1);
+		write(1, "\nEscribe el resultado\n", 22);
+		mult();
 	}
+}
+
+int	main(int argc, char *argv[])
+{
+	int pid = fork(); // para realizar procersos hijos
+	if (pid == -1)
+		return (1);
+	if (pid == 0)
+	{
+		// Child process
+		sleep(2);
+		kill(getppid(), SIGUSR1);
+	}
+	else
+	{
+		struct sigaction sa;
+		sa.sa_flags = SA_RESTART;
+		sa.sa_handler = &handler_sigurs1;
+		sigaction(SIGUSR1, &sa, NULL);
+
+		// Parent process
+		// printf("3 x 5 = ");
+		mult();
+		scanf("%d", &x);
+		if (x == 15)
+			printf("Muy bien\n");
+		else
+			printf("Mal\n");
+		wait(NULL);
+	}
+
+	return (0);
 }
