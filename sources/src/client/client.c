@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/11 21:15:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/12 11:41:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 #include "../../inc/minitalk.h"
 #include "../../libft/inc/libft.h"
 
-static void send_signal(const int pid, char *str)
+static void	send_signal(const int pid, char *str)
 {
-	int i;
-	int bit;
+	int	i;
+	int	bit;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -44,6 +44,7 @@ static void send_signal(const int pid, char *str)
 				kill(pid, SIGUSR2);
 			}
 			bit--;
+			usleep(2); // AUMENTAR SI SE PIERDEN BITE
 		}
 		i++;
 		ft_printf("\n");
