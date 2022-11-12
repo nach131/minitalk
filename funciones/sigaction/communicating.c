@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:49:24 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/11 12:06:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:17:53 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ void handler_sigurs1(int signum)
 int	main(int argc, char *argv[])
 {
 	int pid = fork(); // para realizar procersos hijos
+	printf("pid fork %i\n", pid);
+	printf("uno:%i\n", getppid());
+
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
 	{
 		// Child process
-		sleep(2);
+		sleep(3);
+		printf("dos:%i\n", getppid());
 		kill(getppid(), SIGUSR1);
 	}
 	else
@@ -56,7 +60,7 @@ int	main(int argc, char *argv[])
 		sigaction(SIGUSR1, &sa, NULL);
 
 		// Parent process
-		// printf("3 x 5 = ");
+		// printf("3 x 5 = "); // NO FUNCIONA BIEN CON SIGNAL
 		mult();
 		scanf("%d", &x);
 		if (x == 15)
@@ -65,6 +69,5 @@ int	main(int argc, char *argv[])
 			printf("Mal\n");
 		wait(NULL);
 	}
-
 	return (0);
 }

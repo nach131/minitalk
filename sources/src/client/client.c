@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/12 11:41:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/13 00:42:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	send_signal(const int pid, char *str)
 				kill(pid, SIGUSR2);
 			}
 			bit--;
-			usleep(2); // AUMENTAR SI SE PIERDEN BITE
+			usleep(200); // AUMENTAR SI SE PIERDEN BITE
 		}
 		i++;
 		ft_printf("\n");

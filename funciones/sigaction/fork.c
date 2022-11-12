@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/12 19:53:47 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/12 20:20:04 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/12 21:00:04 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,26 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minitalk.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <signal.h>
+#include <sys/wait.h>
 
-void	ft_print_bits(unsigned char octet)
+void hola()
 {
-	int		i;
-	char	bits;
-
-	i = 7;
-	while (i >= 0)
-	{
-		bits = ((octet >> i) & 1) + '0';
-		ft_printf(GREEN"%c", bits);
-		i--;
-	}
-
+	printf("Hola\n");
 }
 
-// int	ft_find_bit(unsigned char octet)
-// {
-// 	int	i;
-// 	char
-// }
-
-void	ft_spinner(void)
-{
-	char	arrows[4] = { '|' , '/', '-', '\\' };
-	int		i;
-
-	i = 0;
-	while (1)
-	{
-		write(1, &arrows[i], 1);
-		fflush(stdout);
-		i++;
-		if (i > 3)
-			i = 0;
-		usleep(100000);
-		write(1, "\b", 1);
-	}
-}
 
 int	ft_process_bar(void)
 {
 	int pid = fork();
+
+	struct sigaction sa;
+	// sa.sa_flags = SA_RESTART;
+	sa.sa_handler = &hola;
+	sigaction(SIGTSTP, &sa, NULL);
+
 	char arrows[6][12] = {
 "(-o--------)" ,
 "(-----o----)",
@@ -87,3 +63,24 @@ int	ft_process_bar(void)
 	return(pid);
 }
 
+
+int	main(void)
+{
+	int pid = ft_process_bar();
+
+	while (1)
+	{
+		if (pid == -1)
+			return (1);
+		if (pid == 0)
+		{
+			kill(pid, SIGTSTP);
+		}
+		hola();
+		// kill(getppid(), SIGCONT);
+	}
+}
+
+
+// SIGTSTP
+// SIGCONT
