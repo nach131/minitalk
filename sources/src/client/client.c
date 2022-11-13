@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/13 00:42:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:28:57 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	send_signal(const int pid, char *str)
 int	main(int argc, char **argv)
 {
 	int	pid;
-	(void)argv;
 
 	if (argc <= 2)
 	{
@@ -72,5 +71,4 @@ int	main(int argc, char **argv)
 
 	return(0);
 }
-
 

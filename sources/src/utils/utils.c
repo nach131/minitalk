@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/12 19:53:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/13 00:53:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	ft_spinner(void)
 	}
 }
 
-int	ft_process_bar(void)
+void ft_process_bar(void)
 {
-	int pid = fork();
+	// int pid = fork();
 	char arrows[6][12] = {
 "(-o--------)" ,
 "(-----o----)",
@@ -84,6 +84,6 @@ int	ft_process_bar(void)
 			j++;
 		}
 	}
-	return(pid);
+	// return(pid);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/12 22:07:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/13 22:00:38 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ static void handler(int sig)
 	static int bite = 0;
 	static unsigned char ch = '\0';
 
-	// if (sig == 30)
-	// 	ft_printf("1");
-	// else if (sig == 31)
-	// 	ft_printf("0");
-	// ft_printf("\n");
-
 	ch = ch << 1;
 	if (sig == SIGUSR1)
 		ch = ch | 1;
@@ -49,8 +43,6 @@ static void handler(int sig)
 	}
 }
 
-
-
 // static void tokemo(int sig, siginfo_t *info, void *data)
 // {
 
@@ -58,12 +50,6 @@ static void handler(int sig)
 // 	(void)data;
 // 	static int bite = 0;
 // 	static unsigned char ch = '\0';
-
-// 	// if (sig == 30)
-// 	// 	ft_printf("1");
-// 	// else if (sig == 31)
-// 	// 	ft_printf("0");
-// 	// ft_printf("\n");
 
 // 	ch = ch << 1;
 // 	if (info->si_signo == SIGUSR1)
@@ -92,11 +78,16 @@ static void ft_get_pid(void)
 
 static void init()
 {
-	struct sigaction sa;
-	sa.sa_flags = SA_RESTART;
-	// sa.sa_flags = SA_SIGINFO;
+	struct sigaction sa = {
+		.sa_handler = handler,
+		.sa_flags = SA_RESTART
+	};
+
+	// sa.sa_flags = SA_RESTART;
 	// sa.sa_sigaction = tokemo;
-	sa.sa_handler = handler;
+	// sa.sa_mask = SA_RESTART | SIGINT | SIGQUIT | SIGTERM;
+	// sa.sa_mask = SIGINT;
+	// sa.sa_handler = handler;
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		exit(EXIT_FAILURE);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
@@ -105,12 +96,12 @@ static void init()
 
 int	main(void)
 {
-
 	ft_get_pid();
 	init();
 	// ft_process_bar();
 	while (1)
-		sleep(5);
-
+	{
+		sleep(10);
+	}
 	return(0);
 }

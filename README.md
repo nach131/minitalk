@@ -110,26 +110,27 @@ Si el argumento ***oact*** no es ***NULL*** apunta a una estructura donde la acc
 >
 
 ```c
-	struct  sigaction {
-             union __sigaction_u __sigaction_u;  /* controlador de señal */
-             sigset_t sa_mask;                   /* máscara de señal para aplicar */
-             int     sa_flags;                   /* Signal a continuación*/
-     };
+struct sigaction {
+        void (*sa_handler)(int); // puntero a una función
+        void (*sa_sigaction)(int, siginfo_t *, void *); // puntero a una función
+        sigset_t sa_mask;     /* máscara de señal para aplicar */
+        int sa_flags;         /* Signal a continuación*/
+        void (*sa_restorer)(void); // opsoleto NO USAR.
+    }
 ```
-`sa_mask` Adicional asignación del bloqueo durante la ejecución de la función de captura 
+`sa_mask` máscara  de  señales  que  deberían  bloquearse durante la ejecución del manejador de señal. Además, la señal que lance el manejador será bloqueada.
 
-`sa_flag` Aviso especial durante comportamiento de signal
+`sa_flag` máscara  de  señales  que  deberían  bloquearse durante la ejecución de sigaction (`función`)
 
 Estructuras dentro de sigaction
 
+CUIDADO : en algunas arquitecturas se utiliza union para `sa_handler` y `sa_sigation`
 ```c
   union __sigaction_u {
              void    (*__sa_handler)(int);
-             void    (*__sa_sigaction)(int, siginfo_t *,
-                            void *);
+             void    (*__sa_sigaction)(int, siginfo_t *, void *);
      };
 ```
-
 
 `sa_handler` Puntero de la función de captura 
 
