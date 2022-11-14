@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/14 23:55:34 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:20:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minitalk.h"
-
-// #include <limits.h>
 
 static void handler(int sig)
 {
@@ -30,9 +28,10 @@ static void handler(int sig)
 	bite++;
 	if (bite == 8)
 	{
-		ft_printf("%c", ch);
-		// ft_printf(GREEN"");
-		// write(1, &ch, 1);
+		if ((int)ch <= 126)
+			ft_printf(GREEN"%c", ch);
+		else if ((int)ch >= 127)
+			ft_printf("%c", ch);
 		bite = 0;
 		ch = '\0';
 	}
@@ -61,11 +60,9 @@ static void handler(int sig)
 // 	ch <<= 1;
 // }
 
-
-
 static void ft_get_pid(void)
 {
-	int	pid; // SI NO LO USO QUITAR Y PONER EN FT_MESSAGE
+	int	pid;
 	pid = getpid();
 
 	if (!pid)
