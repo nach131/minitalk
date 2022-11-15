@@ -1,8 +1,7 @@
 # ═══ NAMES ═══════════════════════════════════════════════════════════════════#
 
 NAME				= minitalk
-NAME_CLIENT = client
-NAME_SERVER	=	server
+NAME_BONUS	= minitalk_bonus
 
 # ═══ COLORS ══════════════════════════════════════════════════════════════════#
 
@@ -40,18 +39,34 @@ LIBSFT = $(LIBFT_DIR)libft.a
 CLIENT_FILES	= client
 SERVER_FILES	= server
 UTILS_FILES		= utils
+CLIENT_FILES_BONUS	= client_bonus
+SERVER_FILES_BONUS	= server_bonus
 
 SRC_FILES+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
 SRC_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
 SRC_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 
+SRC_FILES_BONUS+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES_BONUS))
+SRC_FILES_BONUS+=$(addprefix $(SERVER_DIR),$(SERVER_FILES_BONUS))
+
+
 EXE_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 EXE_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
+
+EXE_FILES_BONUS+=$(addprefix $(SERVER_DIR),$(CLIENT_FILES_BONUS))
+EXE_FILES_BONUS+=$(addprefix $(CLIENT_DIR),$(SERVER_FILES_BONUS))
+
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 EXECS = $(addprefix $(EXE_DIR), $(EXE_FILES))
+
+SRCS_CLIENT_BONUS +=  $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES_BONUS)))
+OBJS_BONUS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES_BONUS)))
+DEPS_BONUS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES_BONUS)))
+EXECS_BONUS = $(addprefix $(EXE_DIR), $(EXE_FILES_BONUS))
+
 
 # ═══ RULES ══════════════════════════════════════════════════════════════════#
 
@@ -72,7 +87,19 @@ $(EXE_DIR)% : $(OBJ_DIR)%.o
 			@$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
 			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
-clean : 
+bonus: LIBFS $(NAME_BONUS)
+
+$(NAME_BONUS) : $(OBJS_BONUS) $(EXECS_BONUS)
+
+$(EXE_DIR)% :
+			@$(MKDIR) $(dir $@)
+			$(CC) $(CFLAGS) -MMD -MP $(LIBSFT)  $< -o $@
+# @echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
+
+
+
+
+clean :
 			@$(RM) -rf $(OBJ_DIR)
 			@$(RM) -rf $(EXE_DIR)
 			@echo "$(RED)\n ✗ Archivos objetos Minitalk borrados.‼️\n$(WHITE)";
