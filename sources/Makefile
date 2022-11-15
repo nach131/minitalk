@@ -15,7 +15,7 @@ WHITE		=\033[0;37m
 # ═══ COMPILATE ═══════════════════════════════════════════════════════════════#
 
 CC			= gcc
-CFLAGS	= -Wall -Wextra -Werror -g3
+CFLAGS	= -Wall -Wextra -Werror
 AR 			= ar -rcs
 RM			= rm -f
 MKDIR		= -mkdir -p
@@ -50,11 +50,11 @@ SRC_FILES_BONUS+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES_BONUS))
 SRC_FILES_BONUS+=$(addprefix $(SERVER_DIR),$(SERVER_FILES_BONUS))
 
 
-EXE_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 EXE_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
+EXE_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 
-EXE_FILES_BONUS+=$(addprefix $(SERVER_DIR),$(CLIENT_FILES_BONUS))
-EXE_FILES_BONUS+=$(addprefix $(CLIENT_DIR),$(SERVER_FILES_BONUS))
+EXE_FILES_BONUS+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES_BONUS))
+EXE_FILES_BONUS+=$(addprefix $(SERVER_DIR),$(SERVER_FILES_BONUS))
 
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -62,7 +62,7 @@ OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 EXECS = $(addprefix $(EXE_DIR), $(EXE_FILES))
 
-SRCS_CLIENT_BONUS +=  $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES_BONUS)))
+SRCS_CLIENT_BONUS += $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES_BONUS)))
 OBJS_BONUS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES_BONUS)))
 DEPS_BONUS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES_BONUS)))
 EXECS_BONUS = $(addprefix $(EXE_DIR), $(EXE_FILES_BONUS))
@@ -93,7 +93,7 @@ $(NAME_BONUS) : $(OBJS_BONUS) $(EXECS_BONUS)
 
 $(EXE_DIR)% :
 			@$(MKDIR) $(dir $@)
-			$(CC) $(CFLAGS) -MMD -MP $(LIBSFT)  $< -o $@
+			$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) -I$(INCLUDES) $< -o $@
 # @echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
 
