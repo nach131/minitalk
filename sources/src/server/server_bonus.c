@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/15 22:49:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:49:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,37 @@
 
 #include "minitalk.h"
 
-static void handler(int sig)
+// static void handler(int sig)
+// {
+
+// 	static int bite = 0;
+// 	static unsigned char ch = '\0';
+
+// 	ch <<= 1;
+// 	if (sig == SIGUSR1)
+// 		ch |= 1;
+// 	bite++;
+// 	if (bite == 8)
+// 	{
+// 		if ((int)ch <= 126)
+// 			ft_printf(GREEN"%c", ch);
+// 		else if ((int)ch >= 127)
+// 			ft_printf("%c", ch);
+// 		bite = 0;
+// 		ch = '\0';
+// 	}
+// }
+
+static void handler(int sig, siginfo_t *info, void *data)
 {
 
-	static int bite = 0;
-	static unsigned char ch = '\0';
+	// (void)sig;
+	(void)data;
+	(void)info;
+	static int bite;
+	static unsigned char ch;
+
+	// if (info->si_signo == SIGUSR1)
 
 	ch <<= 1;
 	if (sig == SIGUSR1)
@@ -37,29 +63,6 @@ static void handler(int sig)
 	}
 }
 
-// static void tokemo(int sig, siginfo_t *info, void *data)
-// {
-
-// 	// (void)sig;
-// 	(void)data;
-// 	(void)info;
-// 	static int bite;
-// 	static unsigned char ch;
-
-// 	// if (info->si_signo == SIGUSR1)
-
-// 	if (sig == SIGUSR1)
-// 		ch |= 1;
-// 	bite++;
-// 	if (bite == 8)
-// 	{
-// 		// ft_printf(GREEN"%c", ch);
-// 		write(1, &ch, 1);
-// 		bite = 0;
-// 	}
-// 	ch <<= 1;
-// }
-
 static void ft_get_pid(void)
 {
 	int	pid;
@@ -73,8 +76,8 @@ static void ft_get_pid(void)
 static void init()
 {
 	struct sigaction sa = {
-		.sa_handler = handler,
-		// .sa_sigaction = tokemo,
+		// .sa_handler = handler,
+		.sa_sigaction = handler,
 		.sa_flags = SA_RESTART
 	};
 

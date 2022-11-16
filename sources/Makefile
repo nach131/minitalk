@@ -97,9 +97,8 @@ $(EXE_DIR)% :
 # @echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
 
-
-
 clean :
+			@make clean -s -C $(LIBFT_DIR)
 			@$(RM) -rf $(OBJ_DIR)
 			@$(RM) -rf $(EXE_DIR)
 			@echo "$(RED)\n ✗ Archivos objetos Minitalk borrados.‼️\n$(WHITE)";
