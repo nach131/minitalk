@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 05:55:54 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/13 00:53:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/16 22:53:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define MSG_DAN_0 "Error 0: Arguments missing"
 # define MSG_DAN_1 "Error 1: Too many Arguments"
 # define MSG_DAN_2 "Error 2: Could not generate the PID"
-# define MSG_WAR_1 "Warning message 1"
-# define MSG_INF_1 "\nInfo message 1"
+# define MSG_WAR_1 "Error 3: Delivery failed"
+# define MSG_INF_1 "Info message 1"
 # define MSG_SUC_1 "Success message 1"
 
 // typedef enum ERRORS

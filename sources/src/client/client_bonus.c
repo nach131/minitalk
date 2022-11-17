@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/16 21:04:53 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:21:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minitalk.h"
+
+int	received;
+
+static void	handler(int sig)
+{
+
+	if (sig == SIGUSR1)
+	{
+		usleep(200);
+		received++;
+	}
+}
 
 static int	send_signal(const int pid, char ch)
 {
@@ -29,17 +41,19 @@ static int	send_signal(const int pid, char ch)
 		if (((ch >> i) & 1) == 1)
 		{
 			ft_printf(CYAN"1");
-			kill(pid, SIGUSR1);
+			if (kill(pid, SIGUSR1) == -1)
+				ft_message(Warning, MSG_WAR_1);
 			send++;
 		}
 		else
 		{
 			ft_printf(CYAN"0");
-			kill(pid, SIGUSR2);
+			if (kill(pid, SIGUSR2) == -1)
+				ft_message(Warning, MSG_WAR_1);
 			send++;
 		}
 		i--;
-		usleep(200); // AUMENTAR SI SE PIERDEN BITE
+		usleep(200);
 	}
 	ft_printf("\n");
 	return(send);
@@ -63,6 +77,7 @@ int	main(int argc, char **argv)
 	int i;
 	int send;
 
+	received = 0;
 	send = 0;
 	if (argc <= 2)
 	{
@@ -76,15 +91,21 @@ int	main(int argc, char **argv)
 	}
 	pid = ft_atoi(argv[1]);
 	i = 0;
+	signal(SIGUSR1, handler);
 	while (argv[2][i])
 	{
 		send += send_signal(pid, argv[2][i]);
 		i++;
 	}
+
 	print_line(15);
 	ft_printf("\n");
 	ft_printf(GREEN"%d bits have been successfully sent.\n", send);
-
+	ft_printf(ORANGE"%d bits have been successfully received.\n", received);
 	return(0);
 }
 
+//   if (signal(SIGINT, catch_function) == SIG_ERR) {
+//         fputs("An error occurred while setting a signal handler.\n", stderr);
+//         return EXIT_FAILURE;
+//     }
