@@ -110,11 +110,11 @@ Si el argumento ***oact*** no es ***NULL*** apunta a una estructura donde la acc
 
 ```c
 struct sigaction {
-    void      (*sa_handler)(int); // puntero a una función
+    void      (*sa_handler)(int);	 // puntero a una función
     void      (*sa_sigaction)(int, siginfo_t *, void *); // puntero a una función
-    sigset_t  sa_mask;     /* máscara de señal para aplicar */
-    int       sa_flags;         /* Signal a continuación*/
-    void      (*sa_restorer)(void); // opsoleto NO USAR.
+    sigset_t  sa_mask;     		// máscara de señal para aplicar */
+    int       sa_flags;        		// Signal a continuación*/
+    void      (*sa_restorer)(void); 	// opsoleto NO USAR.
     }
 ```
 `sa_mask` máscara  de  señales  que  deberían  bloquearse durante la ejecución del manejador de señal. Además, la señal que lance el manejador será bloqueada.
@@ -139,18 +139,18 @@ El parámetro `siginfo_t` para sa_sigaction es una estructura con los siguientes
 
 ```c
 siginfo_t {
-		int      si_signo;  /* Número de señal */
-		int      si_errno;  /* Un valor errno */
-		int      si_code;   /* Código de señal */
-		pid_t    si_pid;    /* ID del proceso emisor */
-		uid_t    si_uid;    /* ID del usuario real del proceso emisor */
-		int      si_status; /* Valor de salida o señal */
-		clock_t  si_utime;  /* Tiempo de usuario consumido */
-		clock_t  si_stime;  /* Tiempo de sistema consumido */
-		sigval_t si_value;  /* Valor de señal */
-		int      si_int;    /* señal POSIX.1b */
-		void *   si_ptr;    /* señal POSIX.1b */
-		void *   si_addr;   /* Dirección de memoria que ha producido el fallo */
-		int      si_band;   /* Evento de conjunto */
-		int      si_fd;     /* Descriptor de fichero */
+	int      si_signo;  /* Número de señal */
+	int      si_errno;  /* Un valor errno */
+	int      si_code;   /* Código de señal */
+	pid_t    si_pid;    /* ID del proceso emisor */
+	uid_t    si_uid;    /* ID del usuario real del proceso emisor */
+	int      si_status; /* Valor de salida o señal */
+	clock_t  si_utime;  /* Tiempo de usuario consumido */
+	clock_t  si_stime;  /* Tiempo de sistema consumido */
+	sigval_t si_value;  /* Valor de señal */
+	int      si_int;    /* señal POSIX.1b */
+	void *   si_ptr;    /* señal POSIX.1b */
+	void *   si_addr;   /* Dirección de memoria que ha producido el fallo */
+	int      si_band;   /* Evento de conjunto */
+	int      si_fd;     /* Descriptor de fichero */
 }```
