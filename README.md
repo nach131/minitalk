@@ -89,15 +89,14 @@ Cada señal tiene un numero entero que la representa, y un nombre.
 | 30 | SIGUSR1 | Es una señal 1 definida por el usuario|
 | 31 | SIGUSR2 | Es una señal 2 definida por el usuario|
 
-# Signal()
+# [Signal()](https://github.com/nach131/minitalk/blob/main/funciones/signal.c)
  ```c
 	 sig_t	signal(int sig, sig_t func);
 ```
-### [signal()](https://github.com/nach131/minitalk/blob/main/funciones/signal.c)
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
 
- # sigaction()
+ # [sigaction()](https://github.com/nach131/minitalk/tree/main/funciones/sigaction)
 ```c
  int	sigaction(int sig, const struct sigaction *restrict act, struct sigaction *restrict oact);
 ```
@@ -111,11 +110,11 @@ Si el argumento ***oact*** no es ***NULL*** apunta a una estructura donde la acc
 
 ```c
 struct sigaction {
-        void (*sa_handler)(int); // puntero a una función
-        void (*sa_sigaction)(int, siginfo_t *, void *); // puntero a una función
-        sigset_t sa_mask;     /* máscara de señal para aplicar */
-        int sa_flags;         /* Signal a continuación*/
-        void (*sa_restorer)(void); // opsoleto NO USAR.
+    void      (*sa_handler)(int); // puntero a una función
+    void      (*sa_sigaction)(int, siginfo_t *, void *); // puntero a una función
+    sigset_t  sa_mask;     /* máscara de señal para aplicar */
+    int       sa_flags;         /* Signal a continuación*/
+    void      (*sa_restorer)(void); // opsoleto NO USAR.
     }
 ```
 `sa_mask` máscara  de  señales  que  deberían  bloquearse durante la ejecución del manejador de señal. Además, la señal que lance el manejador será bloqueada.
@@ -127,11 +126,31 @@ Estructuras dentro de sigaction
 CUIDADO : en algunas arquitecturas se utiliza union para `sa_handler` y `sa_sigation`
 ```c
   union __sigaction_u {
-             void    (*__sa_handler)(int);
-             void    (*__sa_sigaction)(int, siginfo_t *, void *);
-     };
+    void    (*__sa_handler)(int);
+    void    (*__sa_sigaction)(int, siginfo_t *, void *);
+    };
 ```
 
 `sa_handler` Puntero de la función de captura 
 
 `sa_sigaction` Puntero de la función de captura 
+
+El parámetro `siginfo_t` para sa_sigaction es una estructura con los siguientes elementos
+
+```c
+siginfo_t {
+		int      si_signo;  /* Número de señal */
+		int      si_errno;  /* Un valor errno */
+		int      si_code;   /* Código de señal */
+		pid_t    si_pid;    /* ID del proceso emisor */
+		uid_t    si_uid;    /* ID del usuario real del proceso emisor */
+		int      si_status; /* Valor de salida o señal */
+		clock_t  si_utime;  /* Tiempo de usuario consumido */
+		clock_t  si_stime;  /* Tiempo de sistema consumido */
+		sigval_t si_value;  /* Valor de señal */
+		int      si_int;    /* señal POSIX.1b */
+		void *   si_ptr;    /* señal POSIX.1b */
+		void *   si_addr;   /* Dirección de memoria que ha producido el fallo */
+		int      si_band;   /* Evento de conjunto */
+		int      si_fd;     /* Descriptor de fichero */
+}```
