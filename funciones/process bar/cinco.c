@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   cinco.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/18 21:42:11 by nmota-bu         ###   ########.fr       */
+/*   Created: 2022/11/10 16:38:45 by nmota-bu          #+#    #+#             */
+/*   Updated: 2022/11/18 21:34:40 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,66 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minitalk.h"
+#include <stdio.h>
+#include <unistd.h>
 
-static void	handler(int sig)
+# define ORANGE "\033[1;31m"
+
+int main(int argc, char **argv)
 {
-	static int				bite = 0;
-	static unsigned char	ch = '\0';
+	// 	char arrows[12][5] = {
+	// "\u280b" ,
+	// "\u2819",
+	// "\u2839",
+	// "\u2838",
+	// "\u28b0",
+	// "\u28f0",
+	// "\u28e0",
+	// "\u28c4",
+	// "\u28c6",
+	// "\u2846",
+	// "\u2807",
+	// "\u280f" };
 
-	ch <<= 1;
-	if (sig == SIGUSR1)
-		ch |= 1;
-	bite++;
-	if (bite == 8)
+	char arrows[5][5] = {
+"\u25aa" ,
+"\u25fc",
+"\u2588",
+"\u25fc",
+"\u25aa" };
+
+	int i = 0;
+
+	while (1)
 	{
-		if ((int)ch <= 126)
-			ft_printf(GREEN"%c", ch);
-		else if ((int)ch >= 127)
-			ft_printf("%c", ch);
-		bite = 0;
-		ch = '\0';
+		write(1, &arrows[i], 3);
+		i++;
+		if (i > 4) // -1 arrows items
+			i = 0;
+
+		usleep(200000);
+		write(1, "\b", 1);
 	}
+
+	return 0;
 }
 
-static void	ft_get_pid(void)
-{
-	int	pid;
+// int main()
+// {
 
-	pid = getpid();
-	if (!pid)
-		ft_message(Danger, MSG_DAN_1);
-	ft_printf(ORANGE" Pid: %i\n"WHITE, pid);
-}
+// 	write(1, "\u280b", 4);
+// 	write(1, "\u2819", 4);
+// 	write(1, "\u2839", 4);
+// 	write(1, "\u2838", 4);
+// 	write(1, "\u28b0", 4);
+// 	write(1, "\u28f0", 4);
+// 	write(1, "\u28e0", 4);
+// 	write(1, "\u28c4", 4);
+// 	write(1, "\u28c6", 4);
+// 	write(1, "\u2846", 4);
+// 	write(1, "\u2807", 4);
+// 	write(1, "\u280f", 4);
+// }
 
-static void	init(void)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = handler;
-	sa.sa_flags = SA_RESTART;
-	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		exit(EXIT_FAILURE);
-	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-		exit(EXIT_FAILURE);
-}
-
-int	main(void)
-{
-	ft_get_pid();
-	init();
-	ft_process_bar();
-	// while (1)
-	// 	sleep(200);
-	return (0);
-}
-
+// "⠋⠙⠹⠸⢰⣰⣠⣄⣆⡆⠇⠏"
+// "▪◼█◼▪"

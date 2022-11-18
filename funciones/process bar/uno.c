@@ -62,3 +62,15 @@ main()
 
 	return 0;
 }
+
+// Progress: [          ]
+// Progress: [#         ]
+// Progress: [##        ]
+// Progress: [###       ]
+// Progress: [####      ]
+// Progress: [#####     ]
+// Progress: [######    ]
+// Progress: [#######   ]
+// Progress: [########  ]
+// Progress: [######### ]
+// Progress: [##########]

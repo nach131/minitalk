@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:43:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/13 00:53:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/18 23:18:33 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,62 +28,27 @@ void	ft_print_bits(unsigned char octet)
 		ft_printf(GREEN"%c", bits);
 		i--;
 	}
-
 }
 
-// int	ft_find_bit(unsigned char octet)
-// {
-// 	int	i;
-// 	char
-// }
-
-void	ft_spinner(void)
+void	ft_process_bar(void)
 {
-	char	arrows[4] = { '|' , '/', '-', '\\' };
-	int		i;
+	int i = 0;
+	char *arrows[5];
 
-	i = 0;
+	arrows[0] = "\u25aa";
+	arrows[1] = "\u25fc";
+	arrows[2] = "\u2588";
+	arrows[3] = "\u25fc";
+	arrows[4] = "\u25aa";
+
 	while (1)
 	{
-		write(1, &arrows[i], 1);
-		fflush(stdout);
+		ft_printf(RED"%c", arrows[i]);
 		i++;
-		if (i > 3)
+		if (i > 4)
 			i = 0;
-		usleep(100000);
+
+		usleep(200000);
 		write(1, "\b", 1);
 	}
 }
-
-void ft_process_bar(void)
-{
-	// int pid = fork();
-	char arrows[6][12] = {
-"(-o--------)" ,
-"(-----o----)",
-"(---------o)",
-"(--------o-)",
-"(---o------)",
-"(o---------)" };
-
-	int		i;
-	int		j;
-
-	i = 0;
-	while (1)
-	{
-		write(1, &arrows[i], 12);
-		i++;
-		if (i > 5)
-			i = 0;
-		usleep(200000);
-		j = 0;
-		while (j < 15)
-		{
-			write(1, "\b", 1);
-			j++;
-		}
-	}
-	// return(pid);
-}
-

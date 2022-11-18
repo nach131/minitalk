@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/15 19:35:28 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/17 23:51:33 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ static void	send_signal(const int pid, char ch)
 	while (i >= 0)
 	{
 		if (((ch >> i) & 1) == 1)
-			{
-				ft_printf(CYAN"1");
-				kill(pid, SIGUSR1);
-			}
-			else
-			{
-				ft_printf(CYAN"0");
-				kill(pid, SIGUSR2);
-			}
+		{
+			ft_printf(CYAN"1");
+			kill(pid, SIGUSR1);
+		}
+		else
+		{
+			ft_printf(CYAN"0");
+			kill(pid, SIGUSR2);
+		}
 		i--;
-			usleep(200); // AUMENTAR SI SE PIERDEN BITE
+		usleep(200);
 	}
 	ft_printf("\n");
 }
@@ -84,17 +84,17 @@ static void	send_signal(const int pid, char ch)
 int	main(int argc, char **argv)
 {
 	int	pid;
-	int i;
+	int	i;
 
 	if (argc <= 2)
 	{
 		ft_message(Danger, MSG_DAN_0);
-		return(1);
+		return (1);
 	}
 	else if (argc >= 4)
 	{
 		ft_message(Danger, MSG_DAN_1);
-		return(1);
+		return (1);
 	}
 	pid = ft_atoi(argv[1]);
 	i = 0;
@@ -103,7 +103,5 @@ int	main(int argc, char **argv)
 		send_signal(pid, argv[2][i]);
 		i++;
 	}
-
-	return(0);
+	return (0);
 }
-
