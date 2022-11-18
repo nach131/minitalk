@@ -29,7 +29,6 @@ OBJ_DIR 	= obj/
 EXE_DIR		= exe/
 
 CLIENT_DIR	= client/
-UTILS_DIR		= utils/
 SERVER_DIR	= server/
 
 # ═══ SOURCES ═════════════════════════════════════════════════════════════════#
@@ -38,11 +37,9 @@ LIBSFT = $(LIBFT_DIR)libft.a
 
 CLIENT_FILES	= client
 SERVER_FILES	= server
-UTILS_FILES		= utils
 CLIENT_FILES_BONUS	= client_bonus
 SERVER_FILES_BONUS	= server_bonus
 
-SRC_FILES+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
 SRC_FILES+=$(addprefix $(CLIENT_DIR),$(CLIENT_FILES))
 SRC_FILES+=$(addprefix $(SERVER_DIR),$(SERVER_FILES))
 
@@ -84,7 +81,7 @@ $(NAME) : $(OBJS) $(EXECS)
 
 $(EXE_DIR)% : $(OBJ_DIR)%.o
 			@$(MKDIR) $(dir $@)
-			@$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) $(OBJ_DIR)$(UTILS_DIR)$(UTILS_FILES).o $< -o $@
+			@$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) $< -o $@
 			@echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
 
 bonus: LIBFS $(NAME_BONUS)
@@ -94,8 +91,6 @@ $(NAME_BONUS) : $(OBJS_BONUS) $(EXECS_BONUS)
 $(EXE_DIR)% :
 			@$(MKDIR) $(dir $@)
 			$(CC) $(CFLAGS) -MMD -MP $(LIBSFT) -I$(INCLUDES) $< -o $@
-# @echo "$(ORANGE) Compilando Ejecutables  ➟  $(BLUE)$< $(WHITE)"
-
 
 clean :
 			@make clean -s -C $(LIBFT_DIR)
@@ -111,9 +106,9 @@ re: fclean all
 			@echo "$(YELLOW) Borrado todo y recompilado...✌🏼$(WHITE)"
 
 norm:
-			@norminette $(SRCS) $(INCLUDES) | grep -v Norme -B1 || true
+			@norminette $(SRCS) $(SRCS_CLIENT_BONUS) $(INCLUDES) | grep -v Norme -B1 || true
 
 -include $(DEPS)
 
 # Non-file targets
-.PHONY: all clean fclean re norm LIBFS
+.PHONY: all clean fclean re norm LIBFS bonus

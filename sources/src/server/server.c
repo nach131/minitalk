@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/18 21:42:11 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/19 00:26:51 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,28 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minitalk.h"
+
+// static void	ft_process_bar(void)
+// {
+// 	int i = 0;
+// 	char *arrows[5];
+
+// 	arrows[0] = "\u25aa";
+// 	arrows[1] = "\u25fc";
+// 	arrows[2] = "\u2588";
+// 	arrows[3] = "\u25fc";
+// 	arrows[4] = "\u25aa";
+
+// 	while (1)
+// 	{
+// 		ft_printf(RED"%s", arrows[i]);
+// 		i++;
+// 		if (i > 4)
+// 			i = 0;
+// 		usleep(200000);
+// 		write(1, "\b", 1);
+// 	}
+// }
 
 static void	handler(int sig)
 {
@@ -62,9 +84,7 @@ int	main(void)
 {
 	ft_get_pid();
 	init();
-	ft_process_bar();
-	// while (1)
-	// 	sleep(200);
+	while (1)
+		sleep(200);
 	return (0);
 }
-
