@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/17 23:23:57 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:04:01 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 
 #include "minitalk.h"
 
-static void handler(int sig, siginfo_t *info, void *data)
+static void	handler(int sig, siginfo_t *info, void *data)
 {
-	(void)data;
+	static int				bite = 0;
+	static unsigned char	ch = '\0';
 
-	static int bite;
-	static unsigned char ch;
-
+	(void) data;
 	if (kill(info->si_pid, SIGUSR1) == -1)
 		ft_message(Warning, MSG_WAR_1);
-
 	ch <<= 1;
 	if (sig == SIGUSR1)
 		ch |= 1;
@@ -41,23 +39,22 @@ static void handler(int sig, siginfo_t *info, void *data)
 	}
 }
 
-static void ft_get_pid(void)
+static void	ft_get_pid(void)
 {
 	int	pid;
-	pid = getpid();
 
+	pid = getpid();
 	if (!pid)
 		ft_message(Danger, MSG_DAN_1);
 	ft_printf(ORANGE" Pid: %i\n"WHITE, pid);
 }
 
-static void init()
+static void	init(void)
 {
-	struct sigaction sa = {
-		.sa_sigaction = handler,
-		.sa_flags = SA_RESTART
-	};
+	struct sigaction	sa;
 
+	sa.sa_sigaction = handler;
+	sa.sa_flags = SA_RESTART;
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		exit(EXIT_FAILURE);
 	if (sigaction(SIGUSR2, &sa, NULL) == -1)
@@ -68,8 +65,9 @@ int	main(void)
 {
 	ft_get_pid();
 	init();
-	// ft_process_bar();
 	while (1)
 		sleep(200);
-	return(0);
+	return (0);
 }
+
+// ft_process_bar();
