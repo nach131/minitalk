@@ -14,7 +14,7 @@
 
 <h1 align="center">
 
-<!-- ![mapa](minitalk.png) -->
+![mapa](minitalk.png)
 </h1>
 
  Funciones permitidas
