@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/18 00:06:35 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:50:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,15 @@ static void	handler(int sig)
 	}
 }
 
-static int	send_signal(const int pid, char ch)
+static int	send_signal(const int pid, char ch, int bite)
 {
-	int	i;
 	int	send;
 
-	i = 7;
 	send = 0;
 	ft_printf(ORANGE"'%c' \u2911  "WHITE, ch);
-	while (i >= 0)
+	while (bite >= 0)
 	{
-		if (((ch >> i) & 1) == 1)
+		if (((ch >> bite) & 1) == 1)
 		{
 			ft_printf(CYAN"1");
 			if (kill(pid, SIGUSR1) == -1)
@@ -51,7 +49,7 @@ static int	send_signal(const int pid, char ch)
 				ft_message(Warning, MSG_WAR_1);
 			send++;
 		}
-		i--;
+		bite--;
 		usleep(200);
 	}
 	ft_printf("\n");
@@ -68,6 +66,14 @@ static void	print_line(int n)
 		ft_printf(CYAN"\u2550");
 		i++;
 	}
+}
+
+static void	print_response(int send)
+{
+	print_line(15);
+	ft_printf("\n");
+	ft_printf(GREEN"%d bits have been successfully sent.\n", send);
+	ft_printf("%d bits have been successfully received.\n", g_received);
 }
 
 int	main(int argc, char **argv)
@@ -89,17 +95,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
-	i = 0;
+	i = -1;
 	signal(SIGUSR1, handler);
-	while (argv[2][i])
-	{
-		send += send_signal(pid, argv[2][i]);
-		i++;
-	}
-	print_line(15);
-	ft_printf("\n");
-	ft_printf(GREEN"%d bits have been successfully sent.\n", send);
-	ft_printf("%d bits have been successfully received.\n", g_received);
+	while (argv[2][++i])
+		send += send_signal(pid, argv[2][i], 7);
+	print_response(send);
 	return (0);
 }
 

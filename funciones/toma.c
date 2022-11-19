@@ -2,12 +2,19 @@
 /* ║                 https://github.com/nach131/42Barcelona                 ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include"../sources/libft/inc/libft.h"
+#include <unistd.h>
 
 int	main(void)
+
 {
-	int c;
-	printf("Escribe un numero de caracter para comprobar si es imprimible\n");
-	scanf("%d", &c);
-	printf("el caracter '%c': %d\n", (char)c, ft_isprint(c));
+
+	int i;
+	char str[] = "42 Barcelona";
+	i = -1;
+
+//	while(str[i] != '\0' && ++i > -2)
+	while(str[++i])
+	{
+		write(1, &str[i], 1);
+	}
 }
