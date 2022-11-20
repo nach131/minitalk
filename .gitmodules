@@ -1,3 +1,3 @@
 [submodule "sources/libft"]
 	path = sources/libft
-	url = git@github.com:nach131/00_libft.git
+	url = git@github.com:nach131/libft_plus.git
