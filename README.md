@@ -14,6 +14,7 @@
 
 <h1 align="center">
 
+![gif](minitalk.gif)
 ![mapa](minitalk.png)
 </h1>
 
