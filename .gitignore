@@ -17,3 +17,4 @@ sources/exe
 .env
 node_modules/
 ._*
+*.d
