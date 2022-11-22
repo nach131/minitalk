@@ -15,7 +15,10 @@
 <h1 align="center">
 
 ![gif](minitalk.gif)
+### minitalk
 ![mapa](minitalk.png)
+### minitalk bonus
+![mapa](minitalk_bonus.png)
 </h1>
 
  Funciones permitidas
