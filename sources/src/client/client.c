@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/23 20:26:41 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:12:53 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 
 static void send_signal(const int pid, int signal)
 {
-	kill(pid, signal);
-	usleep(200);
+	if (kill(pid, signal) == -1)
+	{
+		ft_message(Warning, MSG_WAR_1);
+		exit(EXIT_FAILURE);
+	}
+	usleep(300);
 }
 
 static void	char_to_byte(const int pid, char ch)
@@ -69,3 +73,4 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+

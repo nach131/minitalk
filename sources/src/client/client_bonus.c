@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/19 13:50:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:24:53 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,17 @@ static void	handler(int sig)
 	}
 }
 
-static int	send_signal(const int pid, char ch, int bite)
+static void send_signal(const int pid, int signal)
+{
+	if (kill(pid, signal) == -1)
+	{
+		ft_message(Warning, MSG_WAR_1);
+		exit(EXIT_FAILURE);
+	}
+	usleep(300);
+}
+
+static int	char_to_byte(const int pid, char ch, int bite)
 {
 	int	send;
 
@@ -38,39 +48,25 @@ static int	send_signal(const int pid, char ch, int bite)
 		if (((ch >> bite) & 1) == 1)
 		{
 			ft_printf(CYAN"1");
-			if (kill(pid, SIGUSR1) == -1)
-				ft_message(Warning, MSG_WAR_1);
+			send_signal(pid, SIGUSR1);
 			send++;
 		}
 		else
 		{
 			ft_printf(CYAN"0");
-			if (kill(pid, SIGUSR2) == -1)
-				ft_message(Warning, MSG_WAR_1);
+			send_signal(pid, SIGUSR2);
 			send++;
 		}
 		bite--;
-		usleep(200);
+		// usleep(300);
 	}
 	ft_printf("\n");
 	return (send);
 }
 
-static void	print_line(int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		ft_printf(CYAN"\u2550");
-		i++;
-	}
-}
-
 static void	print_response(int send)
 {
-	print_line(15);
+	ft_putuni(16, FBLOCK, YELLOW);
 	ft_printf("\n");
 	ft_printf(GREEN"%d bits have been successfully sent.\n", send);
 	ft_printf("%d bits have been successfully received.\n", g_received);
@@ -98,7 +94,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	signal(SIGUSR1, handler);
 	while (argv[2][++i])
-		send += send_signal(pid, argv[2][i], 7);
+		send += char_to_byte(pid, argv[2][i], 7);
 	print_response(send);
 	return (0);
 }

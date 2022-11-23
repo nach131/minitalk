@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/19 00:26:51 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:14:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ int	main(void)
 	ft_get_pid();
 	init();
 	while (1)
-		sleep(200);
+		sleep(300);
 	return (0);
 }
