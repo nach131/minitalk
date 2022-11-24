@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/23 23:28:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/24 08:37:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	send_signal(const int pid, int signal)
 
 static void	char_to_byte(const int pid, char ch)
 {
-	int	i;
+	int	bite;
 
-	i = 7;
+	bite = 7;
 	ft_printf(ORANGE"'%c' \u2911  "WHITE, ch);
-	while (i >= 0)
+	while (bite >= 0)
 	{
-		if (((ch >> i) & 1) == 1)
+		if (((ch >> bite) & 1) == 1)
 		{
 			ft_printf(CYAN"1");
 			send_signal(pid, SIGUSR1);
@@ -44,7 +44,8 @@ static void	char_to_byte(const int pid, char ch)
 			ft_printf(CYAN"0");
 			send_signal(pid, SIGUSR2);
 		}
-		i--;
+		bite--;
+		usleep(300);
 	}
 	ft_printf("\n");
 }
