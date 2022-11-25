@@ -4,8 +4,8 @@
 	minitalk
 </h1>
  <p align="center">
-<img alt="total-views" src="https://img.shields.io/badge/views-69-blue">
-<img alt="total-clone" src="https://img.shields.io/badge/clone-15-blue">
+<img alt="total-views" src="https://img.shields.io/badge/views-30-blue">
+<img alt="total-clone" src="https://img.shields.io/badge/clone-118-blue">
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/nach131/minitalk">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/nach131/minitalk">
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/nach131/minitalk">
@@ -13,7 +13,6 @@
 </p>
 
 <h1 align="center">
-
 
 ![minitalk](https://github.com/nach131/42Barcelona/blob/main/images/125.png)
 
