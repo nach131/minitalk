@@ -4,8 +4,8 @@
 	minitalk
 </h1>
  <p align="center">
-<img alt="total-views" src="https://img.shields.io/badge/views-69-blue">
-<img alt="total-clone" src="https://img.shields.io/badge/clone-15-blue">
+<img alt="total-views" src="https://img.shields.io/badge/views-30-blue">
+<img alt="total-clone" src="https://img.shields.io/badge/clone-114-blue">
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/nach131/minitalk">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/nach131/minitalk">
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/nach131/minitalk">
@@ -14,14 +14,7 @@
 
 <h1 align="center">
 
-
-![minitalk](https://github.com/nach131/42Barcelona/blob/main/images/125.png)
-
-![gif](minitalk.gif)
-### minitalk
-![mapa](minitalk.png)
-### minitalk bonus
-![mapa](minitalk_bonus.png)
+<!-- ![mapa](minitalk.png) -->
 </h1>
 
  Funciones permitidas
@@ -92,18 +85,18 @@ Cada señal tiene un numero entero que la representa, y un nombre.
 | 18 | SIGTSTP | generada cuando presionamos ***Control + Z***. Puede ser ignorada.|
 | 19 | SIGCONT | Emitido para reanudar un proceso que ha sido parado (suspendido) con SIGSTOP |
 | 20 | SIGCHLD | Cuando un proceso termina o para, el proceso envía esta señal a su padre. Por defecto esta señal es ignorada. Normalmente el proceso padre invoca la función wait para obtener el estatus de término del proceso hijo. Se evita así la creación de procesos "zombies" |
-| 29 | SIGINFO | Es una señal 1 definida por el usuario|
 | 30 | SIGUSR1 | Es una señal 1 definida por el usuario|
 | 31 | SIGUSR2 | Es una señal 2 definida por el usuario|
 
-# [Signal()](https://github.com/nach131/minitalk/blob/main/funciones/signal.c)
+# Signal()
  ```c
 	 sig_t	signal(int sig, sig_t func);
 ```
+### [signal()](https://github.com/nach131/minitalk/blob/main/funciones/signal.c)
 
 Genera una señal en una variedad de eventos externos, se puede configurar para que se interrumpa y continuar donde se dejo.
 
- # [sigaction()](https://github.com/nach131/minitalk/tree/main/funciones/sigaction)
+ # sigaction()
 ```c
  int	sigaction(int sig, const struct sigaction *restrict act, struct sigaction *restrict oact);
 ```
@@ -116,48 +109,27 @@ Si el argumento ***oact*** no es ***NULL*** apunta a una estructura donde la acc
 >
 
 ```c
-struct sigaction {
-    void      (*sa_handler)(int);	 // puntero a una función
-    void      (*sa_sigaction)(int, siginfo_t *, void *); // puntero a una función
-    sigset_t  sa_mask;     		// máscara de señal para aplicar */
-    int       sa_flags;        		// Signal a continuación*/
-    void      (*sa_restorer)(void); 	// opsoleto NO USAR.
-    }
+	struct  sigaction {
+             union __sigaction_u __sigaction_u;  /* controlador de señal */
+             sigset_t sa_mask;               /* máscara de señal para aplicar */
+             int     sa_flags;               /* Signal a continuación*/
+     };
 ```
-`sa_mask` máscara  de  señales  que  deberían  bloquearse durante la ejecución del manejador de señal. Además, la señal que lance el manejador será bloqueada.
+`sa_mask` Adicional asignación del bloqueo durante la ejecución de la función de captura 
 
-`sa_flag` máscara  de  señales  que  deberían  bloquearse durante la ejecución de sigaction (`función`)
+`sa_flag` Aviso especial durante comportamiento de signal
 
 Estructuras dentro de sigaction
 
-CUIDADO : en algunas arquitecturas se utiliza union para `sa_handler` y `sa_sigation`
 ```c
   union __sigaction_u {
-    void    (*__sa_handler)(int);
-    void    (*__sa_sigaction)(int, siginfo_t *, void *);
-    };
+             void    (*__sa_handler)(int);
+             void    (*__sa_sigaction)(int, siginfo_t *,
+                            void *);
+     };
 ```
+
 
 `sa_handler` Puntero de la función de captura 
 
 `sa_sigaction` Puntero de la función de captura 
-
-El parámetro `siginfo_t` para sa_sigaction es una estructura con los siguientes elementos
-
-```c
-siginfo_t {
-	int      si_signo;  /* Número de señal */
-	int      si_errno;  /* Un valor errno */
-	int      si_code;   /* Código de señal */
-	pid_t    si_pid;    /* ID del proceso emisor */
-	uid_t    si_uid;    /* ID del usuario real del proceso emisor */
-	int      si_status; /* Valor de salida o señal */
-	clock_t  si_utime;  /* Tiempo de usuario consumido */
-	clock_t  si_stime;  /* Tiempo de sistema consumido */
-	sigval_t si_value;  /* Valor de señal */
-	int      si_int;    /* señal POSIX.1b */
-	void *   si_ptr;    /* señal POSIX.1b */
-	void *   si_addr;   /* Dirección de memoria que ha producido el fallo */
-	int      si_band;   /* Evento de conjunto */
-	int      si_fd;     /* Descriptor de fichero */
-}```
