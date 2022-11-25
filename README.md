@@ -14,6 +14,9 @@
 
 <h1 align="center">
 
+
+![minitalk](https://github.com/nach131/42Barcelona/blob/main/images/125.png)
+
 ![gif](minitalk.gif)
 ### minitalk
 ![mapa](minitalk.png)
