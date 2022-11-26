@@ -159,4 +159,5 @@ siginfo_t {
 	void *   si_addr;   /* Dirección de memoria que ha producido el fallo */
 	int      si_band;   /* Evento de conjunto */
 	int      si_fd;     /* Descriptor de fichero */
-}```
+}
+```
