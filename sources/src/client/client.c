@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/30 14:11:51 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:12:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	send_signal(const int pid, int signal)
 {
 	if (kill(pid, signal) == -1)
 	{
-		ft_message(Warning, MSG_WAR_1);
+		ft_message(WARNING, MSG_WAR_1);
 		exit(EXIT_FAILURE);
 	}
 	usleep(300);
@@ -54,7 +54,7 @@ static void	err_pid(int pid)
 {
 	if (pid <= 0)
 	{
-		ft_message(Danger, MSG_DAN_3);
+		ft_message(DANGER, MSG_DAN_3);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -66,12 +66,12 @@ int	main(int argc, char **argv)
 
 	if (argc <= 2)
 	{
-		ft_message(Danger, MSG_DAN_0);
+		ft_message(DANGER, MSG_DAN_0);
 		return (1);
 	}
 	else if (argc >= 4)
 	{
-		ft_message(Danger, MSG_DAN_1);
+		ft_message(DANGER, MSG_DAN_1);
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);

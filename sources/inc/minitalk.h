@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 05:55:54 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/19 00:10:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:03:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # define MSG_DAN_0 "Error 0: Arguments missing"
 # define MSG_DAN_1 "Error 1: Too many Arguments"
 # define MSG_DAN_2 "Error 2: Could not generate the PID"
-# define MSG_WAR_1 "Error 3: Delivery failed"
+# define MSG_DAN_3 "Error 3: Invalid PID"
+# define MSG_WAR_1 "Error 4: Delivery failed"
 # define MSG_INF_1 "Info message 1"
 # define MSG_SUC_1 "Success message 1"
 

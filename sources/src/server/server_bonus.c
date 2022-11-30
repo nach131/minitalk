@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/23 23:10:45 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:13:21 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	handler(int sig, siginfo_t *info, void *data)
 
 	(void) data;
 	if (kill(info->si_pid, SIGUSR1) == -1)
-		ft_message(Warning, MSG_WAR_1);
+		ft_message(WARNING, MSG_WAR_1);
 	ch <<= 1;
 	if (sig == SIGUSR1)
 		ch |= 1;
@@ -45,7 +45,7 @@ static void	ft_get_pid(void)
 
 	pid = getpid();
 	if (!pid)
-		ft_message(Danger, MSG_DAN_1);
+		ft_message(DANGER, MSG_DAN_1);
 	ft_printf(ORANGE" Pid: %i\n"WHITE, pid);
 }
 

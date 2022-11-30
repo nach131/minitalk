@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/23 23:14:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:13:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_get_pid(void)
 
 	pid = getpid();
 	if (!pid)
-		ft_message(Danger, MSG_DAN_1);
+		ft_message(DANGER, MSG_DAN_1);
 	ft_printf(ORANGE" Pid: %i\n"WHITE, pid);
 }
 

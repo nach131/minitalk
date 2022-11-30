@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/30 14:11:29 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:12:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	handler(int sig)
 {
 	if (sig <= 0)
 	{
-		ft_message(Danger, MSG_DAN_3);
+		ft_message(DANGER, MSG_DAN_3);
 		exit(EXIT_FAILURE);
 	}
 	if (sig == SIGUSR1)
@@ -36,7 +36,7 @@ static void	send_signal(const int pid, int signal)
 {
 	if (kill(pid, signal) == -1)
 	{
-		ft_message(Warning, MSG_WAR_1);
+		ft_message(WARNING, MSG_WAR_1);
 		exit(EXIT_FAILURE);
 	}
 	usleep(300);
@@ -71,7 +71,7 @@ static int	char_to_byte(const int pid, char ch, int bite)
 
 static void	print_response(int send)
 {
-	ft_putuni(16, FBLOCK, YELLOW);
+	ft_putuni(16, DSHADE, YELLOW);
 	ft_printf("\n");
 	ft_printf(GREEN"%d bits have been successfully sent.\n", send);
 	ft_printf("%d bits have been successfully received.\n", g_received);
@@ -87,12 +87,12 @@ int	main(int argc, char **argv)
 	send = 0;
 	if (argc <= 2)
 	{
-		ft_message(Danger, MSG_DAN_0);
+		ft_message(DANGER, MSG_DAN_0);
 		return (1);
 	}
 	else if (argc >= 4)
 	{
-		ft_message(Danger, MSG_DAN_1);
+		ft_message(DANGER, MSG_DAN_1);
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
