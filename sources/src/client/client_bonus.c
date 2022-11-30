@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/24 08:34:12 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:11:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	g_received;
 
 static void	handler(int sig)
 {
+	if (sig <= 0)
+	{
+		ft_message(Danger, MSG_DAN_3);
+		exit(EXIT_FAILURE);
+	}
 	if (sig == SIGUSR1)
 	{
 		usleep(200);
@@ -91,6 +96,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
+	handler(pid);
 	i = -1;
 	signal(SIGUSR1, handler);
 	while (argv[2][++i])

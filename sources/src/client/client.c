@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:17:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/24 08:37:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:11:51 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ static void	char_to_byte(const int pid, char ch)
 	ft_printf("\n");
 }
 
+static void	err_pid(int pid)
+{
+	if (pid <= 0)
+	{
+		ft_message(Danger, MSG_DAN_3);
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int	pid;
@@ -66,6 +75,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
+	err_pid(pid);
 	i = 0;
 	while (argv[2][i])
 	{
